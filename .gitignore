@@ -1,0 +1,59 @@
+# Laravel specific
+/vendor/
+/node_modules/
+.env
+.env.*
+/storage/*.key
+/public/storage
+/public/hot
+/public/build
+/.phpunit.cache
+/.phpunit.result.cache
+
+# Laravel backups or alternate env files
+.env.backup
+.env.production
+Homestead.yaml
+Homestead.json
+auth.json
+
+# Laravel Vapor
+.vapor/
+
+# Laravel Forge or Deployer related
+.env.deploy
+.deploy*
+
+# IDEs and editors
+/.idea/
+/.vscode/
+/.fleet/
+
+# OS junk files
+.DS_Store
+Thumbs.db
+
+# NPM/Yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Composer files
+composer.lock
+composer.phar
+
+# PHPUnit
+phpunit.xml.backup
+phpunit.xml.dist
+.phpunit.result.cache
+
+# Misc
+*.log
+*.swp
+*.swo
+
+# Optional: coverage reports, if using tools like Xdebug or PHPUnit
+/coverage/
+
+# Optional: Laravel Telescope (if installed)
+storage/telescope

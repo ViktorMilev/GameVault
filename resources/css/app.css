@@ -1,0 +1,327 @@
+@import url('/resources/css/__variables.css');
+
+
+body {
+    background-color: var(--black) !important;
+}
+
+button {
+    color: var(--black) !important;
+    background: var(--button-gradient) !important;
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    position: relative;
+    z-index: 1;
+    transition: all .5s ease-in;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    filter: drop-shadow(0 0 6px var(--magenta))
+            drop-shadow(0 0 8px var(--yellow))
+            drop-shadow(0 0 12px var(--orange));
+    pointer-events: none;
+    z-index: -1;
+}
+
+button:hover {
+    background: var(--button-gradient-hover) !important;
+    transition: all .5s ease-in;
+}
+
+.bg-red-gradient {
+    background: var(--page-gradient-red) !important;
+}
+
+.bg-purple-gradient {
+    background: var(--page-gradient-purple) !important;
+}
+
+.bg-orange-gradient {
+    background: var(--page-gradient-orange) !important;
+}
+
+.bg-yellow-gradient {
+    background: var(--page-gradient-orange) !important;
+}
+
+.bg-green-gradient {
+    background: var(--page-gradient-orange) !important;
+}
+
+.bg-blue-gradient {
+    background: var(--page-gradient-orange) !important;
+}
+
+.bg-cyan-gradient {
+    background: var(--page-gradient-cyan) !important;
+}
+
+.logo {
+    font-family: 'Lucida Sans Unicode', sans-serif;
+    font-size: 50pt;
+    color: white;
+    position: relative;
+    display: inline-block;
+    animation: pulseScale 6s ease-in-out infinite;
+}
+
+.logo::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: transparent;
+    z-index: -1;
+    animation: pulseShadow 4s ease-in-out infinite;
+}
+
+@keyframes pulseScale {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.14);
+    }
+}
+
+@keyframes pulseShadow {
+    0% {
+        text-shadow:
+            0 0 6px var(--orange),
+            0 0 5px var(--yellow),
+            0 0 18px var(--magenta);
+    }
+
+    50% {
+        text-shadow:
+            0 0 6px var(--orange),
+            0 0 18px var(--yellow),
+            0 0 5px var(--magenta);
+    }
+
+    100% {
+        text-shadow:
+            0 0 18px var(--orange),
+            0 0 5px var(--yellow),
+            0 0 6px var(--magenta);
+    }
+}
+
+/*  NAVBAR  */
+nav.navbar {
+    background-image: var(--navbar-gradient) !important;
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    position: relative;
+    z-index: 1;
+}
+
+nav.navbar::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    filter: drop-shadow(0 0 6px var(--magenta))
+            drop-shadow(0 0 8px var(--yellow))
+            drop-shadow(0 0 12px var(--orange));
+    pointer-events: none;
+    z-index: -1;
+}
+
+nav.navbar a.nav-link,
+nav.navbar a.nav-link.active,
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+    color: var(--white) !important;
+    text-shadow: var(--white) 0px 0px 10px;
+}
+
+div#navbarNavDropdown, .navbar-nav {
+    gap: 20px;
+}
+
+.dropdown-menu {
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+}
+
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    filter: drop-shadow(0 0 6px var(--magenta))
+            drop-shadow(0 0 8px var(--yellow))
+            drop-shadow(0 0 12px var(--orange));
+    pointer-events: none;
+    z-index: -1;
+}
+
+.dropdown-menu {
+    background-image: var(--navbar-gradient) !important;
+}
+
+/* Custom CSS for hover-based nested dropdowns */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+    top: 0;
+    left: 100%;
+    margin-top: -0.5rem;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    display: none;
+    position: absolute;
+}
+
+li.dropdown-submenu .dropdown-item,
+li.dropdown-submenu .dropdown-item:focus, li.dropdown-submenu .dropdown-item:hover {
+    background-color: transparent !important;
+    color: var(--white) !important;
+    text-shadow: var(--white) 0px 0px 10px;
+}
+
+form[role="search"] {
+    width: 50vw !important;
+}
+
+/*  NAVBAR  */
+
+
+main {
+    height: auto;
+}
+
+
+/*  FOOTER  */
+footer.bg-dark {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: var(--white);
+    text-align: center;
+    background-image: var(--navbar-gradient) !important;
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    position: relative;
+    z-index: 1;
+}
+
+footer.bg-dark::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 1.4px solid transparent;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    filter: drop-shadow(0 0 6px var(--magenta))
+            drop-shadow(0 0 8px var(--yellow))
+            drop-shadow(0 0 12px var(--orange));
+    pointer-events: none;
+    z-index: -1;
+}
+/*  FOOTER  */
+
+
+/*  GAMES GALLERY  */
+    .game-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .game-box {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+        background: #1c1f22;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 1rem;
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        transition: transform 0.3s ease;
+    }
+
+    .game-box:hover {
+        transform: scale(1.02);
+    }
+
+    .cover img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .game-name {
+        color: white;
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .developer {
+        color: #ccc;
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .platforms {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .platform-icon {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        border-radius: 50%;
+        background-color: #fff;
+        padding: 2px;
+    }
+
+    .empty-game-gallery {
+        height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    }
+
+/*  GAMES GALLERY  */

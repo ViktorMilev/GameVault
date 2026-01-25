@@ -15,7 +15,9 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('homepage');
+Route::get('/game/{slug}', [HomeController::class, 'gameArticle'])->name('game.article');
 Route::get('/categories/{slug}', [HomeController::class, 'categories'])->name('categories.index');
 Route::get('/about_us', [HomeController::class, 'about'])->name('about');
 Route::get('/contacts', [HomeController::class, 'contacts'])->name('contacts');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
+Route::post('/ajax-search', [HomeController::class, 'ajaxSearch'])->name('ajaxSearch');

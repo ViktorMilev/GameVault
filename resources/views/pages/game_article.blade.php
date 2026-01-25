@@ -4,6 +4,6 @@
 
 @section('body')
     <main>
-        @include('page_sections.game_library', ['searched' => false])
+        @include('page_sections.game_article', [])
     </main>
 @endsection

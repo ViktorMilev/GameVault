@@ -4,6 +4,6 @@
 
 @section('body')
     <main class="p-4 bg-purple-gradient">
-        @include('pageComponents.about_page_container')
+        @include('page_sections.about_page_container')
     </main>
 @endsection

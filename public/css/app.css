@@ -1,4 +1,4 @@
-@import url('/resources/css/__variables.css');
+@import url('./__variables.css');
 
 
 body {
@@ -207,6 +207,24 @@ li.dropdown-submenu .dropdown-item:focus, li.dropdown-submenu .dropdown-item:hov
 form[role="search"] {
     width: 50vw !important;
 }
+
+#navbar-searchbar-input {
+    background: linear-gradient(90deg, #ffffdc, #ffdfd4);
+}
+
+#navbar-searchbar-results {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ced4da;
+    border-top: none;
+    background: #fff;
+}
+
+#navbar-searchbar-results li:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
 
 /*  NAVBAR  */
 

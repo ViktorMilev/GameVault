@@ -29,6 +29,23 @@ class HomeController extends Controller
         );
     }
 
+    public function gameArticle($slug) {
+        $pageTitle = null;
+        $categories = $this->homepageService->fetchCategoriesAndSubcategories();
+        $gameData = $this->homepageService->fetchGameByName($slug);
+        $pageTitle = $gameData[0]->name ?? 'Игра без име';
+        $navbarItems = $this->homepageService->fetchNavbarItems();
+        
+        return view('pages.game_article', 
+            compact(
+                'pageTitle', 
+                'categories',
+                'gameData',
+                'navbarItems',
+            )
+        );
+    }
+
     public function categories($categoryName) {
         $pageTitle = "GameVault";
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
@@ -90,5 +107,17 @@ class HomeController extends Controller
                 'query',
             )
         );
+    }
+
+    public function ajaxSearch(Request $request) {
+        $query = $request->input('query');
+
+        if (!$query) {
+            return response()->json([]);
+        }
+
+        $games = $this->homepageService->searchGamesByQuery($query);
+ 
+        return response()->json($games->toArray());
     }
 }

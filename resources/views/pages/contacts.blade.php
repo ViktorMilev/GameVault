@@ -4,6 +4,6 @@
 
 @section('body')
     <main class="p-4 bg-orange-gradient">
-        @include('pageComponents.contacts_page_container')
+        @include('page_sections.contacts_page_container')
     </main>
 @endsection

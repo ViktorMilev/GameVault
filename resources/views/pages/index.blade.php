@@ -4,6 +4,6 @@
 
 @section('body')
     <main class="bg-red-gradient">
-        @include('pageComponents.game_library', ['searched' => false])
+        @include('page_sections.game_library', ['searched' => false])
     </main>
 @endsection

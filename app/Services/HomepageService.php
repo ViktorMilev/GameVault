@@ -28,6 +28,12 @@ class HomepageService
                     ->get();
     }
 
+    public function fetchGameByName($gameName) {
+        return Game::with(['subcategory', 'platforms'])
+                    ->where('slug', $gameName)
+                    ->get();
+    }
+
     public function fetchNavbarItems() {
         return [
             [

@@ -6,7 +6,7 @@ body {
 }
 
 button {
-    color: var(--black) !important;
+    color: var(--darkgray) !important;
     background: var(--button-gradient) !important;
     border: 1.4px solid transparent;
     border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
@@ -23,10 +23,10 @@ button::before {
     right: -2px;
     bottom: -2px;
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    /*border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
     filter: drop-shadow(0 0 6px var(--magenta))
             drop-shadow(0 0 8px var(--yellow))
-            drop-shadow(0 0 12px var(--orange));
+            drop-shadow(0 0 12px var(--orange));*/
     pointer-events: none;
     z-index: -1;
 }
@@ -49,15 +49,15 @@ button:hover {
 }
 
 .bg-yellow-gradient {
-    background: var(--page-gradient-orange) !important;
+    background: var(--page-gradient-yellow) !important;
 }
 
 .bg-green-gradient {
-    background: var(--page-gradient-orange) !important;
+    background: var(--page-gradient-green) !important;
 }
 
 .bg-blue-gradient {
-    background: var(--page-gradient-orange) !important;
+    background: var(--page-gradient-blue) !important;
 }
 
 .bg-cyan-gradient {
@@ -343,3 +343,92 @@ footer.bg-dark::before {
     }
 
 /*  GAMES GALLERY  */
+
+
+.game-article-img {
+    border: 2px solid yellow;
+    border-radius: 15px;    
+    box-shadow: 1px 1px 15px 5px orange;
+}
+
+.game-article-box .header {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--orange) 0%, var(--magenta) 100%);
+    background-size: 200% 100%;
+    background-position: left center;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-article-box .game-review .username {
+    font-size: 14pt;
+    color: var(--lightgray);
+}
+
+.game-article-box .game-review .user-profile-img {
+    width: 60px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 2px var(--black);
+}
+
+#gameArticleReviewForm .bg-dark {
+    position: relative;
+    background-color: var(--black); /* solid black background */
+    border-radius: 12px;
+    padding: 1rem 1.5rem; /* adjust for content */
+    color: var(--white);   /* text color */
+    z-index: 0;
+}
+
+#gameArticleReviewForm .bg-dark::before {
+    content: "";
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    border-radius: inherit;
+    padding: 1.4px; /* thickness of the border */
+    background: linear-gradient(
+        90deg,
+        var(--magenta),
+        var(--yellow),
+        var(--orange),
+        var(--yellow),
+        var(--magenta)
+    );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: -1; /* behind the black div content */
+}
+
+#gameArticleReviewForm .bg-dark .form-control, #gameArticleReviewForm .bg-dark .form-select {
+    background-color: #2E2636 !important;
+    border-color: transparent !important;
+    color: var(--white) !important;
+}
+
+#gameArticleReviewForm .bg-dark .form-control:focus, #gameArticleReviewForm .bg-dark .form-select:focus {
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+#gameArticleReviewForm .bg-dark #review-text {
+    resize: none;
+}
+
+#gameArticleReviewForm .bg-dark .form-control::placeholder {
+    color: var(--white) !important;
+}
+
+.star::before {
+    content: "★";
+    color: gold;
+    font-size: 1.5rem;
+}

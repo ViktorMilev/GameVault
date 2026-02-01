@@ -5,6 +5,8 @@
     --magenta: #FF00FF;
     --black: #000000;
     --white: #FFFFFF;
+    --lightgray: #DCDCDC;
+    --darkgray: #1A1A1A;
 
     --navbar-gradient: linear-gradient(#4c5054, #212529);
     --button-gradient: linear-gradient(#FFA500, #ffeb67);
@@ -13,5 +15,8 @@
     --page-gradient-cyan: linear-gradient(#000000, #0a5240);
     --page-gradient-purple: linear-gradient(#000000, #3b0a52);
     --page-gradient-orange: linear-gradient(#000000, #52310a);
+    --page-gradient-yellow: linear-gradient(#000000, #52480a);
+    --page-gradient-green: linear-gradient(#000000, #16520a);
+    --page-gradient-blue: linear-gradient(#000000, #0a3052);
     --light-gradient2: linear-gradient(#f8f9fa, #cbced1);
 }

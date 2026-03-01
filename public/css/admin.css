@@ -1,0 +1,80 @@
+@import url('./__variables.css');
+
+
+body {
+    background-color: #1b1b2f;
+    color: var(--white);
+}
+
+p {
+    color: var(--white);
+}
+
+.sidebar {
+    background: linear-gradient(325deg, #16161d, var(--admin-purple-color-1));
+    width: 260px;
+    height: 100vh;
+    color: var(--white);
+    padding: 20px 0;
+}
+
+.sidebar .menu a {
+    display: block;
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.sidebar .menu a:hover {
+    background-color: var(--admin-purple-color-2);
+}
+
+.sidebar .menu .active {
+    background-color: var(--admin-purple-color-2);
+}
+
+.content {
+    padding: 2rem;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #44fd8e;
+    box-shadow: 0 0 8px #44fd8e;
+}
+
+.card-custom {
+    background: linear-gradient(1deg, rgba(59, 59, 98, 0.4), var(--admin-indigo-color-1));
+    border: none;
+    border-radius: 12px;
+}
+
+.card-custom h5 {
+    color: var(--pale-pink-1);
+}
+
+.logout-btn {
+    background-color: #8000ff;
+    border: none;
+}
+
+.logout-btn:hover {
+    background-color: #a64dff;
+}

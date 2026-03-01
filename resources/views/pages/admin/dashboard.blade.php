@@ -1,95 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #1b1b2f;
-            color: #f5f5f5;
-        }
+@extends('layouts.admin')
 
-        .sidebar {
-            background-color: #4b0082;
-            min-height: 100vh;
-            color: #fff;
-            padding-top: 2rem;
-        }
+@section('title', $pageTitle)
 
-        .sidebar a {
-            display: block;
-            color: #fff;
-            padding: 0.75rem 1rem;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .sidebar a:hover {
-            background-color: #6a0dad;
-        }
-
-        .sidebar .active {
-            background-color: #8000ff;
-        }
-
-        .content {
-            padding: 2rem;
-        }
-
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .card-custom {
-            background-color: #2b2b4a;
-            border: none;
-            border-radius: 12px;
-        }
-
-        .card-custom h5 {
-            color: #ffccff;
-        }
-
-        .logout-btn {
-            background-color: #8000ff;
-            border: none;
-        }
-
-        .logout-btn:hover {
-            background-color: #a64dff;
-        }
-    </style>
-</head>
-<body>
+@section('body')
+<main>
     <div class="d-flex">
-        {{-- Sidebar --}}
-        <nav class="sidebar flex-shrink-0">
-            <div class="text-center mb-4">
-                <h3>GameVault Admin</h3>
-            </div>
-            <a href="{{ route('admin.dashboard') }}" class="active">Dashboard</a>
-            <a href="#">Игри</a>
-            <a href="#">Платформи</a>
-            <a href="#">Потребители</a>
-            <a href="#">Категории</a>
-            <a href="#">Подкатегории</a>
-            <a href="#">Системни настройки</a>
-            <form action="{{ route('admin.logout') }}" method="POST" class="mt-3 px-3">
-                @csrf
-                <button type="submit" class="btn w-100 logout-btn">Logout</button>
-            </form>
-        </nav>
+        @include('shared_components.admin_layout_sidebar')
 
         {{-- Main content --}}
         <div class="content flex-grow-1">
             <div class="dashboard-header">
                 <h1>Добре дошъл, Admin!</h1>
-                <span>Статус: <strong>Online</strong></span>
+                <span class="status online">Статус: <strong>Online</strong></span>
             </div>
 
             {{-- Stats cards --}}
@@ -97,25 +19,25 @@
                 <div class="col-md-3">
                     <div class="card card-custom p-3">
                         <h5>Общо Игри</h5>
-                        <p class="fs-3">120</p>
+                        <p class="fs-3 text-light">120</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3">
                         <h5>Платформи</h5>
-                        <p class="fs-3">8</p>
+                        <p class="fs-3 text-light">8</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3">
                         <h5>Потребители</h5>
-                        <p class="fs-3">540</p>
+                        <p class="fs-3 text-light">540</p>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card card-custom p-3">
                         <h5>Категории</h5>
-                        <p class="fs-3">12</p>
+                        <p class="fs-3 text-light">12</p>
                     </div>
                 </div>
             </div>
@@ -182,5 +104,5 @@
 
         </div>
     </div>
-</body>
-</html>
+</main>
+@endsection

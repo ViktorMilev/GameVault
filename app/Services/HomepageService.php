@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Game;
 use App\Models\GamePlatform;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 class HomepageService
@@ -57,6 +58,10 @@ class HomepageService
                 'route' => route('contacts'),
             ],
         ];
+    }
+
+    public function fetchAllUsers() {
+        return User::select(['id', 'name', 'email'])->get();
     }
 
     public function searchGamesByQuery($query) {

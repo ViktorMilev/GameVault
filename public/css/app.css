@@ -6,7 +6,7 @@ body {
 }
 
 button {
-    color: var(--darkgray) !important;
+    color: var(--admin-purple-color-1) !important;
     background: var(--button-gradient) !important;
     border: 1.4px solid transparent;
     border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
@@ -15,7 +15,7 @@ button {
     transition: all .5s ease-in;
 }
 
-button::before {
+/*button::before {
     content: '';
     position: absolute;
     top: -2px;
@@ -23,13 +23,13 @@ button::before {
     right: -2px;
     bottom: -2px;
     border: 1.4px solid transparent;
-    /*border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
     filter: drop-shadow(0 0 6px var(--magenta))
             drop-shadow(0 0 8px var(--yellow))
-            drop-shadow(0 0 12px var(--orange));*/
+            drop-shadow(0 0 12px var(--orange)); 
     pointer-events: none;
     z-index: -1;
-}
+}*/
 
 button:hover {
     background: var(--button-gradient-hover) !important;
@@ -67,7 +67,7 @@ button:hover {
 .logo {
     font-family: 'Lucida Sans Unicode', sans-serif;
     font-size: 50pt;
-    color: white;
+    color: var(--white);
     position: relative;
     display: inline-block;
     animation: pulseScale 6s ease-in-out infinite;
@@ -116,6 +116,40 @@ button:hover {
             0 0 5px var(--yellow),
             0 0 6px var(--magenta);
     }
+}
+
+.logo-static {
+    font-family: 'Lucida Sans Unicode', sans-serif;
+    font-size: inherit;
+    color: var(--white);
+    text-shadow:
+        0 0 6px var(--orange),
+        0 0 5px var(--yellow),
+        0 0 18px var(--magenta);
+    position: relative;
+    display: inline-block;
+}
+
+.logo-static::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: transparent;
+    z-index: -1;
+}
+
+.form-control {
+    background-color: #2E2636 !important;
+    border-color: transparent !important;
+    color: var(--white) !important;
+    border-color: transparent !important;
+    outline: none !important;
+}
+
+.form-control:focus {
+    border-color: transparent !important;
+    box-shadow: none !important;
 }
 
 /*  NAVBAR  */
@@ -176,8 +210,19 @@ div#navbarNavDropdown, .navbar-nav {
     z-index: -1;
 }
 
+.dropdown-menu.dropdown-left::before {
+    top: -25px;
+    left: -25px;
+    right: -25px;
+    bottom: -25px;
+}
+
 .dropdown-menu {
     background-image: var(--navbar-gradient) !important;
+}
+
+.btn.no-arrow.dropdown-toggle::after {
+    display: none;
 }
 
 /* Custom CSS for hover-based nested dropdowns */
@@ -209,19 +254,48 @@ form[role="search"] {
 }
 
 #navbar-searchbar-input {
-    background: linear-gradient(90deg, #ffffdc, #ffdfd4);
+    background: #2E2636 !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #2E2636 inset !important;  
+    -webkit-text-fill-color: #ede3f6 !important;  
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+#navbar-searchbar-input::placeholder {
+    color: var(--white) !important;
+}
+
+#navbar-searchbar-input::-moz-placeholder,
+#navbar-searchbar-input:-ms-input-placeholder,
+#navbar-searchbar-input::-webkit-input-placeholder {
+    color: var(--white) !important;
 }
 
 #navbar-searchbar-results {
     max-height: 300px;
     overflow-y: auto;
-    border: 1px solid #ced4da;
+    border: 1px solid mediumvioletred;
+    box-shadow: 1px 1px 15px 5px var(--magenta);
     border-top: none;
-    background: #fff;
+    background-color: #2E2636;
+}
+
+#navbar-searchbar-results li.list-group-item {
+    background-color: #2E2636;
+    color: var(--white);
+}
+
+#navbar-searchbar-results li.list-group-item.text-muted {
+    color: #d8d8d8 !important;
 }
 
 #navbar-searchbar-results li:hover {
-    background-color: #f8f9fa;
+    background-color: #4e4359;
     cursor: pointer;
 }
 

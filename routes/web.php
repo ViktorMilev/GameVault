@@ -29,7 +29,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'login'])->name('admin.login.auth');
     
     Route::middleware(['admin'])->group(function () {
-        Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/homepage', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/{entity}', [AdminController::class, 'categoriesIndexPage'])->name('admin.categories.index');
+        Route::get('/{entity}/new-{slug}', [AdminController::class, 'entityEditPage'])->name('admin.entities.create');
+        Route::get('/{entity}/edit/{slug}', [AdminController::class, 'entityEditPage'])->name('admin.entities.edit');
+        Route::get('/{entity}/delete/{slug}', [AdminController::class, 'entityEditPage'])->name('admin.entities.delete');
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
     });
 });

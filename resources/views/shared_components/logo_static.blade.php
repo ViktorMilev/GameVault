@@ -1,0 +1,1 @@
+<h1 class="logo-static" data-text="{{ Config::get('site_vars.site_name') }}">{{ Config::get('site_vars.site_name') }}</h1>

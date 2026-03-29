@@ -21,7 +21,7 @@
                 <td>{{ $user->id }}</td>
 
                 <td class="fw-bold">
-                    {{ $user->name }}
+                    {{ $user->username }}
                 </td>
 
                 <td>{{ $user->email }}</td>
@@ -37,14 +37,14 @@
 
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a href="{{ route('admin.entities.edit', ['entity' => 'games', 'slug' => $user->id]) }}"
+                                <a href="{{ route('admin.entities.edit', ['entity' => 'users', 'slug' => $user->username]) }}"
                                     class="dropdown-item">
                                     Edit
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{ route('game.article', $user->id) }}" class="dropdown-item"
+                                <a href="{{ route('game.article', $user->username) }}" class="dropdown-item"
                                     target="_blank">
                                     View
                                 </a>
@@ -52,7 +52,7 @@
 
                             <li>
                                 <form method="POST"
-                                    action="{{ route('admin.entities.delete', ['entity' => 'games', 'slug' => $user->id]) }}"
+                                    action="{{ route('admin.entities.delete', ['entity' => 'users', 'slug' => $user->username]) }}"
                                     onsubmit="return confirm('Delete this game?')">
                                     @csrf
                                     @method('DELETE')

@@ -35,6 +35,13 @@
             'route' => 'admin.entities.create',
             'params' => ['entity' => 'users', 'slug' => 'users']
         ],
+        'system_settings' => [
+            'admin-title' => 'System Settings',
+            'admin-subtitle' => 'Manage your system settings',
+            'label' => 'System Settings',
+            'route' => 'admin.entities.create',
+            'params' => ['entity' => ' ', 'slug' => ' ']
+        ],
     ];
 
     $tableViews = [
@@ -42,6 +49,7 @@
         'categories' => 'page_sections.admin_category_tables.admin_categories_table',
         'game_platforms' => 'page_sections.admin_category_tables.admin_platforms_table',
         'users' => 'page_sections.admin_category_tables.admin_users_table',
+        'system_settings' => 'page_sections.admin_category_tables.admin_system_settings_table',
     ];
 
     $currentEntity = $createBtnItems[$menuActive] ?? null;
@@ -65,21 +73,23 @@
                 </div>
 
                 {{-- CREATE BUTTON DROPDOWN --}}
-                <div class="dropdown dropstart">
-                    <button class="btn btn-primary  dropdown-toggle no-arrow"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                        Create New
-                    </button>
+                @if($menuActive !== 'system_settings')
+                    <div class="dropdown dropstart">
+                        <button class="btn btn-primary  dropdown-toggle no-arrow"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Create New
+                        </button>
 
-                    <div class="dropdown-menu">
-                        @if($currentEntity)
-                            <a href="{{ route($currentEntity['route'], $currentEntity['params']) }}" class="dropdown-item">
-                                Add {{ $currentEntity['label'] }}
-                            </a>
-                        @endif
+                        <div class="dropdown-menu">
+                            @if($currentEntity)
+                                <a href="{{ route($currentEntity['route'], $currentEntity['params']) }}" class="dropdown-item">
+                                    Add {{ $currentEntity['label'] }}
+                                </a>
+                            @endif
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
 
             @if($currentTable)
@@ -100,7 +110,7 @@
 }
 
 .admin-title {
-    color: #c084fc;
+    color: var(--admin-header-color-1);
     font-size: 28px;
     font-weight: bold;
 }
@@ -144,12 +154,19 @@
 }
 
 .platform-badge {
-    background: #6d28d9;
     color: white;
     padding: 4px 8px;
     margin-right: 5px;
     border-radius: 6px;
     font-size: 12px;
+}
+
+.platform-badge:nth-child(odd) {
+    background: var(--admin-primary-color-2);
+}
+
+.platform-badge:nth-child(even) {
+    background: var(--admin-primary-color-3);
 }
 
 .status-badge {
@@ -175,7 +192,7 @@
 }
 
 .btn-primary:hover {
-    background: #6d28d9;
+    background: var(--admin-primary-color-2);
 }
 
 .btn-icon {
@@ -192,10 +209,13 @@
     position: absolute;
     background: #1e1e28;
     border-radius: 8px;
-    padding: 8px;
+    padding: 0;
     display: none;
     min-width: 160px;
     z-index: 999;
+}
+
+.dropdown-menu li {
 }
 
 .dropdown-right {
@@ -210,7 +230,8 @@
 }
 
 .dropdown-item:hover {
-    background: #6d28d9;
+    background: var(--admin-primary-color-2);
+    color: var(--white);
 }
 
 .text-danger {

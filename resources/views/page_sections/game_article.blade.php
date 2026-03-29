@@ -51,7 +51,7 @@
                             <div class="col-7">
                                 <div class="row">
                                     <div class="col">
-                                        <span class="username">User_0904994255434</span>
+                                        <span class="username">SsssnipperWolf3</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -65,7 +65,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        This game sucks ass, it's horrible.
+                                        This game is an absolute masterpiece! The graphics are stunning, the storyline is engaging, and the gameplay keeps you hooked for hours. Highly recommended for any gamer.
                                     </div>
                                 </div>
                                 <div class="row">

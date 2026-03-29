@@ -28,6 +28,8 @@
             </div>
 
             <button type="submit" class="btn btn-success w-100">Login</button>
+
+            <a class="custom-link" href="{{ route('admin.signin') }}">Create a new account</a>
         </form>
     </div>
 </div>

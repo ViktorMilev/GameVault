@@ -5,34 +5,16 @@ namespace App\Services;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Game;
-use App\Models\GamePlatform;
+use App\Models\Platform;
 use App\Models\User;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomepageService
 {
     public function fetchCategoriesAndSubcategories() {
         return Category::with('subcategories')->get();
-    }
-
-    public function fetchCategoryIdBySubcategory($subcatName) {
-        return Subcategory::where('slug', $subcatName)->value('category_id');
-    }
-
-    public function fetchAllGames() {
-        return Game::all();
-    }
-
-    public function fetchGamesByCategory($categoryId) {
-        return Game::with(['subcategory', 'platforms'])
-                    ->where('category_id', $categoryId)
-                    ->get();
-    }
-
-    public function fetchGameByName($gameName) {
-        return Game::with(['subcategory', 'platforms'])
-                    ->where('slug', $gameName)
-                    ->get();
     }
 
     public function fetchNavbarItems() {
@@ -60,8 +42,44 @@ class HomepageService
         ];
     }
 
+    public function fetchCategories() {
+        return Category::all();
+    }
+
+    public function fetchSubcategories() {
+        return Subcategory::all();
+    }
+
+    public function fetchCategoryIdBySubcategory($subcatName) {
+        return Subcategory::where('slug', $subcatName)->value('category_id');
+    }
+
+    public function fetchEntityBySlug($model, $field, $slug) {
+        return $model::where($field, $slug)->first();
+    }
+
+    public function fetchAllGames() {
+        return Game::all();
+    }
+
+    public function fetchAllGamePlatforms() {
+        return Platform::all();
+    }
+
+    public function fetchGamesByCategory($categoryId) {
+        return Game::with(['subcategory', 'platforms'])
+                    ->where('category_id', $categoryId)
+                    ->get();
+    }
+
+    public function fetchGameByName($gameName) {
+        return Game::with(['subcategory', 'platforms'])
+                    ->where('slug', $gameName)
+                    ->get();
+    }
+
     public function fetchAllUsers() {
-        return User::select(['id', 'name', 'email'])->get();
+        return User::select(['id', 'username', 'email'])->get();
     }
 
     public function searchGamesByQuery($query) {

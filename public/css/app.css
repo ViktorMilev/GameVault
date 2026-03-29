@@ -1,39 +1,65 @@
-@import url('./__variables.css');
-
-
 body {
     background-color: var(--black) !important;
 }
 
-button {
-    color: var(--admin-purple-color-1) !important;
-    background: var(--button-gradient) !important;
-    border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
-    position: relative;
-    z-index: 1;
-    transition: all .5s ease-in;
+pt-1 {
+    padding-top: 0.25rem !important;
 }
 
-/*button::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+.pt-2 {
+    padding-top: 0.5rem !important;
+}
+
+.pt-3 {
+    padding-top: 1rem !important;
+}
+
+.pt-4 {
+    padding-top: 1.5rem !important;
+}
+
+.pt-5 {
+    padding-top: 3rem !important;
+}
+
+a.custom-link {
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+a.custom-link:hover {
+    color: var(--admin-tertiary-color);
+    transition: all 0.2s ease-in-out;
+}
+
+button {
+    color: var(--admin-primary-color-1) !important;
+    background: var(--button-gradient) !important;
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
-    filter: drop-shadow(0 0 6px var(--magenta))
-            drop-shadow(0 0 8px var(--yellow))
-            drop-shadow(0 0 12px var(--orange)); 
-    pointer-events: none;
-    z-index: -1;
-}*/
+    border-image: linear-gradient(90deg, var(--neon-gradient-color-4), var(--neon-gradient-color-3), var(--neon-gradient-color-2), var(--neon-gradient-color-3), var(--neon-gradient-color-4)) 1;
+    position: relative;
+    z-index: 1;
+    transition: all 0.5s ease-in;
+}
 
 button:hover {
     background: var(--button-gradient-hover) !important;
-    transition: all .5s ease-in;
+    color: #83164d !important;
+    transition: all 0.5s ease-in;
+}
+
+.button {
+    color: var(--admin-primary-color-1) !important;
+    background: var(--button-gradient) !important;
+    z-index: 1;
+    transition: all 0.5s ease-in;
+}
+
+.button:hover {
+    background: var(--button-gradient-hover) !important;
+    color: #83164d !important;
+    transition: all 0.5s ease-in;
 }
 
 .bg-red-gradient {
@@ -98,23 +124,23 @@ button:hover {
 @keyframes pulseShadow {
     0% {
         text-shadow:
-            0 0 6px var(--orange),
-            0 0 5px var(--yellow),
-            0 0 18px var(--magenta);
+            0 0 6px var(--neon-gradient-color-2),
+            0 0 5px var(--neon-gradient-color-3),
+            0 0 18px var(--neon-gradient-color-4);
     }
 
     50% {
         text-shadow:
-            0 0 6px var(--orange),
-            0 0 18px var(--yellow),
-            0 0 5px var(--magenta);
+            0 0 6px var(--neon-gradient-color-2),
+            0 0 18px var(--neon-gradient-color-3),
+            0 0 5px var(--neon-gradient-color-4);
     }
 
     100% {
         text-shadow:
-            0 0 18px var(--orange),
-            0 0 5px var(--yellow),
-            0 0 6px var(--magenta);
+            0 0 18px var(--neon-gradient-color-2),
+            0 0 5px var(--neon-gradient-color-3),
+            0 0 6px var(--neon-gradient-color-4);
     }
 }
 
@@ -123,9 +149,9 @@ button:hover {
     font-size: inherit;
     color: var(--white);
     text-shadow:
-        0 0 6px var(--orange),
-        0 0 5px var(--yellow),
-        0 0 18px var(--magenta);
+        0 0 6px var(--neon-gradient-color-2),
+        0 0 5px var(--neon-gradient-color-3),
+        0 0 18px var(--neon-gradient-color-4);
     position: relative;
     display: inline-block;
 }
@@ -140,7 +166,7 @@ button:hover {
 }
 
 .form-control {
-    background-color: #2E2636 !important;
+    background-color: var(--general-input-color-1) !important;
     border-color: transparent !important;
     color: var(--white) !important;
     border-color: transparent !important;
@@ -156,7 +182,7 @@ button:hover {
 nav.navbar {
     background-image: var(--navbar-gradient) !important;
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    border-image: linear-gradient(90deg, var(--neon-gradient-color-4), var(--neon-gradient-color-3), var(--neon-gradient-color-2), var(--neon-gradient-color-3), var(--neon-gradient-color-4)) 1;
     position: relative;
     z-index: 1;
 }
@@ -169,10 +195,10 @@ nav.navbar::before {
     right: -2px;
     bottom: -2px;
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
-    filter: drop-shadow(0 0 6px var(--magenta))
-            drop-shadow(0 0 8px var(--yellow))
-            drop-shadow(0 0 12px var(--orange));
+    border-image: linear-gradient(90deg, var(--neon-gradient-color-4), var(--neon-gradient-color-3), var(--neon-gradient-color-2), var(--neon-gradient-color-3), var(--neon-gradient-color-4)) 1;
+    filter: drop-shadow(0 0 6px var(--neon-gradient-color-4))
+            drop-shadow(0 0 8px var(--neon-gradient-color-3))
+            drop-shadow(0 0 12px var(--neon-gradient-color-2));
     pointer-events: none;
     z-index: -1;
 }
@@ -191,7 +217,7 @@ div#navbarNavDropdown, .navbar-nav {
 
 .dropdown-menu {
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    border-image: linear-gradient(90deg, var(--neon-gradient-color-4), var(--neon-gradient-color-3), var(--neon-gradient-color-2), var(--neon-gradient-color-3), var(--neon-gradient-color-4)) 1;
 }
 
 .dropdown-menu::before {
@@ -202,10 +228,10 @@ div#navbarNavDropdown, .navbar-nav {
     right: -2px;
     bottom: -2px;
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
-    filter: drop-shadow(0 0 6px var(--magenta))
-            drop-shadow(0 0 8px var(--yellow))
-            drop-shadow(0 0 12px var(--orange));
+    border-image: linear-gradient(90deg, var(--neon-gradient-color-4), var(--neon-gradient-color-3), var(--neon-gradient-color-2), var(--neon-gradient-color-3), var(--neon-gradient-color-4)) 1;
+    filter: drop-shadow(0 0 6px var(--neon-gradient-color-4))
+            drop-shadow(0 0 8px var(--neon-gradient-color-3))
+            drop-shadow(0 0 12px var(--neon-gradient-color-2));
     pointer-events: none;
     z-index: -1;
 }
@@ -254,14 +280,14 @@ form[role="search"] {
 }
 
 #navbar-searchbar-input {
-    background: #2E2636 !important;
+    background: var(--general-input-color-1) !important;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px #2E2636 inset !important;  
+    -webkit-box-shadow: 0 0 0 1000px var(--general-input-color-1) inset !important;  
     -webkit-text-fill-color: #ede3f6 !important;  
     transition: background-color 9999s ease-in-out 0s;
 }
@@ -280,13 +306,13 @@ input:-webkit-autofill:active {
     max-height: 300px;
     overflow-y: auto;
     border: 1px solid mediumvioletred;
-    box-shadow: 1px 1px 15px 5px var(--magenta);
+    box-shadow: 1px 1px 15px 5px var(--neon-gradient-color-4);
     border-top: none;
-    background-color: #2E2636;
+    background-color: var(--general-input-color-1);
 }
 
 #navbar-searchbar-results li.list-group-item {
-    background-color: #2E2636;
+    background-color: var(--general-input-color-1);
     color: var(--white);
 }
 
@@ -317,7 +343,7 @@ footer.bg-dark {
     text-align: center;
     background-image: var(--navbar-gradient) !important;
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
+    border-image: linear-gradient(90deg, var(--neon-gradient-color-4), var(--neon-gradient-color-3), var(--neon-gradient-color-2), var(--neon-gradient-color-3), var(--neon-gradient-color-4)) 1;
     position: relative;
     z-index: 1;
 }
@@ -330,10 +356,10 @@ footer.bg-dark::before {
     right: -2px;
     bottom: -2px;
     border: 1.4px solid transparent;
-    border-image: linear-gradient(90deg, var(--magenta), var(--yellow), var(--orange), var(--yellow), var(--magenta)) 1;
-    filter: drop-shadow(0 0 6px var(--magenta))
-            drop-shadow(0 0 8px var(--yellow))
-            drop-shadow(0 0 12px var(--orange));
+    border-image: linear-gradient(90deg, var(--neon-gradient-color-4), var(--neon-gradient-color-3), var(--neon-gradient-color-2), var(--neon-gradient-color-3), var(--neon-gradient-color-4)) 1;
+    filter: drop-shadow(0 0 6px var(--neon-gradient-color-4))
+            drop-shadow(0 0 8px var(--neon-gradient-color-3))
+            drop-shadow(0 0 12px var(--neon-gradient-color-2));
     pointer-events: none;
     z-index: -1;
 }
@@ -360,7 +386,7 @@ footer.bg-dark::before {
         border: 1px solid #333;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        box-shadow: 0 0 15px var(--game-box-shadow-color-1);
         transition: transform 0.3s ease;
     }
 
@@ -436,14 +462,14 @@ footer.bg-dark::before {
 
 
 .game-article-img {
-    border: 2px solid yellow;
+    border: 2px solid var(--game-article-img-border-color-1);
     border-radius: 15px;    
-    box-shadow: 1px 1px 15px 5px orange;
+    box-shadow: 1px 1px 15px 5px var(--game-article-img-box-shadow-color-1);
 }
 
 .game-article-box .header {
     display: inline-block;
-    background: linear-gradient(90deg, var(--orange) 0%, var(--magenta) 100%);
+    background: linear-gradient(90deg, var(--neon-gradient-color-2) 0%, var(--neon-gradient-color-4) 100%);
     background-size: 200% 100%;
     background-position: left center;
 
@@ -483,11 +509,11 @@ footer.bg-dark::before {
     padding: 1.4px; /* thickness of the border */
     background: linear-gradient(
         90deg,
-        var(--magenta),
-        var(--yellow),
-        var(--orange),
-        var(--yellow),
-        var(--magenta)
+        var(--neon-gradient-color-4),
+        var(--neon-gradient-color-3),
+        var(--neon-gradient-color-2),
+        var(--neon-gradient-color-3),
+        var(--neon-gradient-color-4)
     );
     -webkit-mask: 
         linear-gradient(#fff 0 0) content-box, 
@@ -499,7 +525,7 @@ footer.bg-dark::before {
 }
 
 #gameArticleReviewForm .bg-dark .form-control, #gameArticleReviewForm .bg-dark .form-select {
-    background-color: #2E2636 !important;
+    background-color: var(--general-input-color-1) !important;
     border-color: transparent !important;
     color: var(--white) !important;
 }

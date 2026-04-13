@@ -8,20 +8,26 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use App\Models\Game;
+use App\Models\Category;
+use App\Models\Subcategory;
+use App\Models\GamePlatform;
+use App\Models\Platform;
 use App\Models\User;
 use App\Services\AdminService;
 use App\Services\HomepageService;
 
 class AdminController extends Controller
 {
-    private $adminEmailAddress = 'vikdmilev@gmail.com';
-    private $adminPassword = 'ux]=Cd(,n1)l@E;';
+    protected $adminEmailAddress;
+    protected $adminPassword;
     protected $adminService;
     protected $homepageService;
 
     public function __construct(AdminService $adminService, HomepageService $homepageService) {
         $this->adminService = $adminService;
         $this->homepageService = $homepageService;
+        $adminEmailAddress = env('ADMIN_EMAIL_ADDRESS', '');
+        $adminPassword = env('ADMIN_PASSWORD', '');
     }
 
     public function signInPage() {
@@ -84,6 +90,7 @@ class AdminController extends Controller
         $request->session()->forget('is_admin');
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('admin.login');
     }
 
@@ -107,9 +114,35 @@ class AdminController extends Controller
         );
     }
 
-    public function categoriesIndexPage() {
-        $pageTitle = 'categoriesIndexPage';
+    public function categoriesIndexPage($entity) {
+        switch ($entity) {
+            case 'games':
+                $pageTitle = 'Admin • Games';
+                break;
+            case 'game_platforms':
+                $pageTitle = 'Admin • Game Platforms';
+                break;
+            case 'categories':
+                $pageTitle = 'Admin • Categories';
+                break;
+            case 'games':
+                $pageTitle = 'Admin • Games';
+                break;
+            case 'games':
+                $pageTitle = 'Admin • Games';
+                break;
+            case 'users':
+                $pageTitle = 'Admin • Users';
+                break;
+            case 'system_settings':
+                $pageTitle = 'Admin • System Settings';
+                break;
+            default:
+                abort(404, 'Entity type not found.');
+        }
+        
         $games = $this->homepageService->fetchAllGames();
+        $gamePlatforms = $this->homepageService->fetchAllGamePlatforms();
         $gameCategories = $this->homepageService->fetchCategoriesAndSubcategories();
         $users = $this->homepageService->fetchAllUsers();
     
@@ -117,6 +150,7 @@ class AdminController extends Controller
             compact(
                 'pageTitle',
                 'games',
+                'gamePlatforms',
                 'gameCategories',
                 'users'
             )
@@ -130,32 +164,41 @@ class AdminController extends Controller
         switch ($entity) {
             case 'games':
                 $pageTitle .= 'Game';
-                $entityBladeFileName = 'edit_game';
+                $entityBladeFileName = 'game';
                 $entityData = $this->homepageService->fetchEntityBySlug(Game::class, 'slug', $slug);
+                break;
+            case 'game_platforms':
+                $pageTitle .= 'Game';
+                $entityBladeFileName = 'game_platform';
+                $entityData = $this->homepageService->fetchEntityBySlug(Platform::class, 'slug', $slug);
+                break;
+            case 'categories':
+                $pageTitle .= 'Category';
+                $entityBladeFileName = 'game_category';
+                $entityData = $this->homepageService->fetchEntityBySlug(Category::class, 'id', $slug);
                 break;
             case 'users':
                 $pageTitle .= 'User';
-                $entityBladeFileName = 'edit_user';
+                $entityBladeFileName = 'user';
                 $entityData = $this->homepageService->fetchEntityBySlug(User::class, 'username', $slug);
                 break;
             default:
                 abort(404, 'Entity type not found.');
         }
 
- 
-
         $gameCategories = $this->homepageService->fetchCategories();
         $gameSubcategories = $this->homepageService->fetchSubcategories();
         $gamePlatforms = $this->homepageService->fetchAllGamePlatforms();
 
     
-        return view('pages.admin.entity_edit_views' . '.' . $entityBladeFileName, 
+        return view('pages.admin.entity_edit_page', 
             compact(
                 'pageTitle',
                 'gameCategories',
                 'gameSubcategories',
                 'gamePlatforms',
-                'entityData'
+                'entityData',
+                'entityBladeFileName'
             )
         );
     }
@@ -166,6 +209,10 @@ class AdminController extends Controller
         switch ($entity) {
             case 'games':
                 return $this->adminService->updateGame($request, $slug);
+            case 'game_platforms':
+                return $this->adminService->updateGamePlatform($request, $slug);
+            case 'categories':
+                return $this->adminService->updateGameCategory($request, $slug);
             case 'users':
                 return $this->adminService->updateUser($request, $slug);
             default:

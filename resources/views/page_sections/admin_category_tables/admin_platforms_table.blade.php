@@ -8,9 +8,6 @@
                 <th>ID</th>
                 <th>Cover</th>
                 <th>Name</th>
-                <th>Developer</th>
-                <th>Category</th>
-                <th>Platforms</th>
                 <th>Status</th>
                 <th style="width: 80px;"></th>
             </tr>
@@ -18,35 +15,19 @@
 
         <tbody>
 
-            @foreach($games as $game)
+            @foreach($gamePlatforms as $platform)
 
             <tr>
 
-                <td>{{ $game->id }}</td>
+                <td>{{ $platform->id }}</td>
 
                 <td>
-                    <img src="{{ asset(Config::get('site_vars.cover_url') . '/' . $game->cover_image) }}"
-                        alt="{{ $game->name }}" class="game-cover-thumb">
+                    <img src="{{ asset(Config::get('site_vars.platform_url') . '/' . $platform->icon_filepath) }}"
+                        alt="{{ $platform->name }}" class="platform-icon-thumb">
                 </td>
 
                 <td class="fw-bold">
-                    {{ $game->name }}
-                </td>
-
-                <td>
-                    {{ $game->developer }}
-                </td>
-
-                <td>
-                    {{ $game->category->name ?? '—' }}
-                </td>
-
-                <td>
-                    @foreach($game->platforms as $platform)
-                    <span class="platform-badge">
-                        {{ $platform->name }}
-                    </span>
-                    @endforeach
+                    {{ $platform->name }}
                 </td>
 
                 <td>
@@ -66,28 +47,28 @@
 
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a href="{{ route('admin.entities.edit', ['entity' => 'games', 'slug' => $game->slug]) }}"
+                                <a href="{{ route('admin.entities.edit', ['entity' => 'game_platforms', 'slug' => $platform->slug]) }}"
                                     class="dropdown-item">
-                                    Edit
+                                    {{ $t['general']['edit'] }}
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{ route('game.article', $game->slug) }}" class="dropdown-item"
+                                <a href="{{ route('game.article', $platform->slug) }}" class="dropdown-item"
                                     target="_blank">
-                                    View
+                                    {{ $t['general']['view'] }}
                                 </a>
                             </li>
 
                             <li>
                                 <form method="POST"
-                                    action="{{ route('admin.entities.delete', ['entity' => 'games', 'slug' => $game->slug]) }}"
+                                    action="{{ route('admin.entities.delete', ['entity' => 'game_platforms', 'slug' => $platform->slug]) }}"
                                     onsubmit="return confirm('Delete this game?')">
                                     @csrf
                                     @method('DELETE')
 
                                     <button type="submit" class="dropdown-item text-danger">
-                                        Delete
+                                        {{ $t['general']['delete'] }}
                                     </button>
                                 </form>
                             </li>

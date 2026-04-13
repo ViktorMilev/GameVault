@@ -30,7 +30,13 @@ class Game extends Model
         return $this->belongsTo(Subcategory::class);
     }
 
-    public function platforms() {
-        return $this->belongsToMany(Platform::class, 'game_platforms');
+    public function platforms()
+    {
+        return $this->belongsToMany(
+            Platform::class,
+            'game_platforms',
+            'game_id',
+            'platform_id'
+        )->withTimestamps();
     }
 }

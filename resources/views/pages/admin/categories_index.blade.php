@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin • Games')
+@section('title', $pageTitle)
 
 @section('body')
 @php
@@ -36,8 +36,8 @@
             'params' => ['entity' => 'users', 'slug' => 'users']
         ],
         'system_settings' => [
-            'admin-title' => 'System Settings',
-            'admin-subtitle' => 'Manage your system settings',
+            'admin-title' => $t['admin']['system_settings']['title'] ?? 'System Settings',
+            'admin-subtitle' => $t['admin']['system_settings']['subtitle'] ?? 'Manage your system settings',
             'label' => 'System Settings',
             'route' => 'admin.entities.create',
             'params' => ['entity' => ' ', 'slug' => ' ']
@@ -151,6 +151,13 @@
 .game-cover-thumb {
     height: 60px;
     border-radius: 6px;
+}
+
+.platform-icon-thumb {
+    height: 50px;
+    border-radius: 6px;
+    background: white;
+    padding: 4px;
 }
 
 .platform-badge {

@@ -1,6 +1,7 @@
 @php
    //dd($gameData);
    $gameReviews = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+   $isLoggedIn = false;
 @endphp
 
 <div class=" text-white m-4 game-article-container">
@@ -46,7 +47,7 @@
                 <div class="row game-review mb-4 align-items-start">
               
                             <div class="col-1 d-flex justify-content-center">
-                                <img src="https://backloggd-avatars.b-cdn.net/t7x1j833it14jk5wputupipnxf83?optimizer=image&quality=25" alt="" class="user-profile-img">
+                                <img src="https://previews.123rf.com/images/kitoul/kitoul2306/kitoul230600018/207249962-vector-illustration-of-a-wolf-head-in-profile-on-a-dark-background.jpg" alt="" class="user-profile-img">
                             </div>
                             <div class="col-7">
                                 <div class="row">
@@ -85,6 +86,9 @@
     <div class="col-12" id="gameArticleReviewForm">
         <div class="bg-dark card p-3">
             <h5 class="card-title text-light mb-3">Write a New Review</h5>
+            @if(!$isLoggedIn)
+                <p class="text-light">Please <a href="{{ route('loginpage') }}">log in</a> to write a review.</p>
+            @else
             <form action="#" method="POST">
                 @csrf
 
@@ -112,6 +116,7 @@
 
                 <button type="submit" class="btn btn-primary">Submit Review</button>
             </form>
+            @endif
         </div>
     </div>
 </div>

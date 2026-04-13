@@ -18,7 +18,7 @@ class HomeController extends Controller
         $pageTitle = "GameVault";
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
         $games = $this->homepageService->fetchAllGames();
-        $navbarItems = $this->homepageService->fetchNavbarItems();
+        $navbarItems = $this->homepageService->fetchNavbarItems(app('t'));
         
         return view('pages.index', 
             compact(
@@ -35,7 +35,7 @@ class HomeController extends Controller
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
         $gameData = $this->homepageService->fetchGameByName($slug);
         $pageTitle = $gameData[0]->name ?? 'Игра без име';
-        $navbarItems = $this->homepageService->fetchNavbarItems();
+        $navbarItems = $this->homepageService->fetchNavbarItems(app('t'));
         
         return view('pages.game_article', 
             compact(
@@ -52,7 +52,7 @@ class HomeController extends Controller
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
         $categoryId = $this->homepageService->fetchCategoryIdBySubcategory($categoryName);
         $games = $this->homepageService->fetchGamesByCategory($categoryId);
-        $navbarItems = $this->homepageService->fetchNavbarItems();
+        $navbarItems = $this->homepageService->fetchNavbarItems(app('t'));
         
         return view('pages.games_gallery', 
             compact(
@@ -67,7 +67,7 @@ class HomeController extends Controller
     public function about() {
         $pageTitle = "About Us";
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
-        $navbarItems = $this->homepageService->fetchNavbarItems();
+        $navbarItems = $this->homepageService->fetchNavbarItems(app('t'));
 
         return view('pages.about',
             compact(
@@ -81,7 +81,7 @@ class HomeController extends Controller
     public function contacts() {
         $pageTitle = "About Us";
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
-        $navbarItems = $this->homepageService->fetchNavbarItems();
+        $navbarItems = $this->homepageService->fetchNavbarItems(app('t'));
 
         return view('pages.contacts',
             compact(
@@ -92,9 +92,19 @@ class HomeController extends Controller
         );
     }
 
+    public function loginPage() {
+        $pageTitle = 'Login Page';
+    
+        return view('pages.loginpage', 
+            compact(
+                'pageTitle'
+            )
+        );
+    }
+
     public function search(Request $request) {
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
-        $navbarItems = $this->homepageService->fetchNavbarItems();
+        $navbarItems = $this->homepageService->fetchNavbarItems(app('t'));
         $query = $request->input('q');
         $games = $this->homepageService->searchGamesByQuery($query);
         $pageTitle = "Search Results for " . $query;

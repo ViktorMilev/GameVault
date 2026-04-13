@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Game;
 use App\Models\Platform;
+use App\Models\GamePlatform;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -17,25 +18,25 @@ class HomepageService
         return Category::with('subcategories')->get();
     }
 
-    public function fetchNavbarItems() {
+    public function fetchNavbarItems($t) {
         return [
             [
-                'name' => 'Home',
+                'name' => $t['general']['navbar']['home'],
                 'type' => 'homeIndex',
                 'route' => route('homepage'),
             ],
             [
-                'name' => 'Categories',
+                'name' => $t['general']['navbar']['categories'],
                 'type' => 'dropdown',
                 'route' => '',
             ],
             [
-                'name' => 'About Us',
+                'name' => $t['general']['navbar']['about_us'],
                 'type' => 'singular',
                 'route' => route('about'),
             ],
             [
-                'name' => 'Contacts',
+                'name' => $t['general']['navbar']['contacts'],
                 'type' => 'singular',
                 'route' => route('contacts'),
             ],

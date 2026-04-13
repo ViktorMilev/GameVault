@@ -34,28 +34,28 @@
 
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a href="{{ route('admin.entities.edit', ['entity' => 'games', 'slug' => $category->id]) }}"
+                                <a href="{{ route('admin.entities.edit', ['entity' => 'categories', 'slug' => $category->id]) }}"
                                     class="dropdown-item">
-                                    Edit
+                                    {{ $t['general']['edit'] }}
                                 </a>
                             </li>
 
                             <li>
                                 <a href="{{ route('game.article', $category->id) }}" class="dropdown-item"
                                     target="_blank">
-                                    View
+                                    {{ $t['general']['view'] }}
                                 </a>
                             </li>
 
                             <li>
                                 <form method="POST"
-                                    action="{{ route('admin.entities.delete', ['entity' => 'games', 'slug' => $category->id]) }}"
+                                    action="{{ route('admin.entities.delete', ['entity' => 'categories', 'slug' => $category->id]) }}"
                                     onsubmit="return confirm('Delete this game?')">
                                     @csrf
                                     @method('DELETE')
 
                                     <button type="submit" class="dropdown-item text-danger">
-                                        Delete
+                                        {{ $t['general']['delete'] }}
                                     </button>
                                 </form>
                             </li>

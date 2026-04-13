@@ -40,8 +40,8 @@
         @endforeach
       </ul>
       <form class="d-flex" role="search" action="{{ route('search') }}" method="GET">
-        <input class="form-control me-2" type="search" name="q" id="navbar-searchbar-input" placeholder="Search games..." aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" name="q" id="navbar-searchbar-input" placeholder="{{ $t['general']['navbar']['search_placeholder'] }}" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">{{ $t['general']['navbar']['search_btn'] }}</button>
         
         <ul id="navbar-searchbar-results" class="list-group position-absolute w-100" style="top: 100%; left: 0; z-index: 1050; display: none;"></ul>
       </form>

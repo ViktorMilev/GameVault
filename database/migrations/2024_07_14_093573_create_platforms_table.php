@@ -14,22 +14,23 @@ return new class extends Migration
         Schema::create('platforms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique()->nullable();
             $table->string('icon_filepath');
             $table->timestamps();
         });
 
         DB::table('platforms')->insert([
-            ['name' => 'Android', 'icon_filepath' => 'android.svg'],
-            ['name' => 'iOS', 'icon_filepath' => 'ios.svg'],
-            ['name' => 'macOS', 'icon_filepath' => 'macos.svg'],
-            ['name' => 'Nintendo Switch', 'icon_filepath' => 'nintendo_switch.svg'],
-            ['name' => 'Nintendo Switch 2', 'icon_filepath' => 'nintendo_switch_2.svg'],
-            ['name' => 'OS X', 'icon_filepath' => 'os_x.svg'],
-            ['name' => 'PlayStation 4', 'icon_filepath' => 'playstation_4.svg'],
-            ['name' => 'PlayStation 5', 'icon_filepath' => 'playstation_5.svg'],
-            ['name' => 'Windows', 'icon_filepath' => 'microsoft_windows.svg'],
-            ['name' => 'Xbox One', 'icon_filepath' => 'xbox.svg'],
-            ['name' => 'Xbox Series X/S', 'icon_filepath' => 'xbox_xs.svg'],
+            ['name' => 'Android', 'slug' => 'android', 'icon_filepath' => 'android.svg'],
+            ['name' => 'iOS', 'slug' => 'ios', 'icon_filepath' => 'apple_ios.svg'],
+            ['name' => 'macOS', 'slug' => 'macos', 'icon_filepath' => 'apple_macos.svg'],
+            ['name' => 'Nintendo Switch', 'slug' => 'nintendo-switch', 'icon_filepath' => 'nintendo_switch.svg'],
+            ['name' => 'Nintendo Switch 2', 'slug' => 'nintendo-switch-2', 'icon_filepath' => 'nintendo_switch_2.svg'],
+            ['name' => 'OS X', 'slug' => 'os-x', 'icon_filepath' => 'apple_macos.svg'],
+            ['name' => 'PlayStation 4', 'slug' => 'playstation-4', 'icon_filepath' => 'playstation_4.svg'],
+            ['name' => 'PlayStation 5', 'slug' => 'playstation-5', 'icon_filepath' => 'playstation_5.svg'],
+            ['name' => 'Windows', 'slug' => 'windows', 'icon_filepath' => 'windows.svg'],
+            ['name' => 'Xbox One', 'slug' => 'xbox-one', 'icon_filepath' => 'xbox_one.svg'],
+            ['name' => 'Xbox Series X/S', 'slug' => 'xbox-series-x-s', 'icon_filepath' => 'xbox_series_x_s.svg'],
         ]);
     }
 

@@ -39,14 +39,14 @@
                             <li>
                                 <a href="{{ route('admin.entities.edit', ['entity' => 'users', 'slug' => $user->username]) }}"
                                     class="dropdown-item">
-                                    Edit
+                                    {{ $t['general']['edit'] }}
                                 </a>
                             </li>
 
                             <li>
                                 <a href="{{ route('game.article', $user->username) }}" class="dropdown-item"
                                     target="_blank">
-                                    View
+                                    {{ $t['general']['view'] }}
                                 </a>
                             </li>
 
@@ -58,7 +58,7 @@
                                     @method('DELETE')
 
                                     <button type="submit" class="dropdown-item text-danger">
-                                        Delete
+                                        {{ $t['general']['delete'] }}
                                     </button>
                                 </form>
                             </li>

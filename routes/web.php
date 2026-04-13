@@ -1,6 +1,10 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
+
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 
@@ -23,6 +27,17 @@ Route::get('/contacts', [HomeController::class, 'contacts'])->name('contacts');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::post('/ajax-search', [HomeController::class, 'ajaxSearch'])->name('ajaxSearch');
 
+Route::get('/login', [HomeController::class, 'loginPage'])->name('loginpage');
+
+Route::post('/lang/switch', function (Request $request) {
+    $locale = $request->input('locale');
+
+    if (in_array($locale, ['en', 'bg', 'ru'])) {
+        Session::put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('app.lang.switch');
+
 
 Route::prefix('admin')->group(function () {
     Route::get('/sign-in', [AdminController::class, 'signInPage'])->name('admin.signin');
@@ -40,6 +55,16 @@ Route::prefix('admin')->group(function () {
 
         Route::post('/{entity}/edit/{slug}/update-data', [AdminController::class, 'updateEntityData'])->name('admin.entities.update');
 
+
+        Route::post('lang/switch', function (Request $request) {
+            $locale = $request->input('locale');
+
+            if (in_array($locale, ['en', 'bg', 'ru'])) {
+                Session::put('locale', $locale);
+            }
+            return redirect()->back();
+        })->name('admin.lang.switch');
+
         Route::post('/theme/change', function(\Illuminate\Http\Request $request) {
             $request->validate([
                 'theme' => 'required|string'
@@ -48,6 +73,6 @@ Route::prefix('admin')->group(function () {
             session(['theme' => $request->theme]);
 
             return back();
-        })->name('theme.change');
+        })->name('admin.system.theme.change');
     });
 });

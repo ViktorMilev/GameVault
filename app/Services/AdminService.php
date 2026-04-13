@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Game;
 use App\Models\Platform;
+use App\Models\GamePlatform;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class AdminService
     public function fetchCategoryEntitiesCountMap() {     
         return [
             'game_categories' => Category::count(),
-            'game_platgorms' => Platform::count(),
+            'game_platforms' => Platform::count(),
             'games' => Game::count(),
             'users' => User::count(),
         ];
@@ -91,6 +92,74 @@ class AdminService
         }
 
         return redirect('/admin/games/edit/' . $game->slug)->with('success', 'Game updated successfully.');
+    }
+
+    public function updateGamePlatform(Request $request, $slug) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
+        ]);
+
+        $exists = DB::table('platforms')->where('slug', $slug)->first();
+
+        if (!$exists) {
+            return redirect()->back()->with('error', "Game Platform with slug '{$slug}' not found.");
+        }
+
+        $updateData = [];
+        $fields = [
+            'name' => 'name',
+            'slug' => 'slug',
+        ];
+
+        foreach($fields as $requestKey => $dbColumn) {
+            if ($request->has($requestKey)) {
+                $updateData[$dbColumn] = $request->input($requestKey);
+            }
+        }
+
+        if (empty($updateData)) {
+            return redirect()->back()->with('error', 'Nothing to update.');
+        }
+
+        $gamePlatform = Platform::where('slug', $slug)->first();
+
+        $gamePlatform->update($updateData);
+
+        return redirect('/admin/game_platforms/edit/' . $gamePlatform->slug)->with('success', 'Game Platform updated successfully.');
+    }
+
+    public function updateGameCategory(Request $request, $slug) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $exists = DB::table('categories')->where('id', $slug)->first();
+
+        if (!$exists) {
+            return redirect()->back()->with('error', "Game Category with slug '{$slug}' not found.");
+        }
+
+        $updateData = [];
+        $fields = [
+            'name' => 'name',
+        ];
+
+        foreach($fields as $requestKey => $dbColumn) {
+            if ($request->has($requestKey)) {
+                $updateData[$dbColumn] = $request->input($requestKey);
+            }
+        }
+
+        if (empty($updateData)) {
+            return redirect()->back()->with('error', 'Nothing to update.');
+        }
+
+        $gameCategory = Category::where('id', $slug)->first();
+
+        $gameCategory->update($updateData);
+
+        return redirect('/admin/categories/edit/' . $gameCategory->id)->with('success', 'Game Category updated successfully.');
     }
 
     public function updateUser(Request $request, $username)

@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.login.auth') }}" method="POST">
+        <form action="#" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label text-light">{{ $t['general']['email'] }}</label>

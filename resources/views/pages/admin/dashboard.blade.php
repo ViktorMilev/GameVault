@@ -14,12 +14,12 @@
         {{-- Main content --}}
         <div class="content flex-grow-1">
             <div class="dashboard-header">
-                <h1>Welcome, Admin!</h1>
+                <h1>{{ $t['admin']['welcome_message'] }}, Admin!</h1>
                 <span class="status online">Status: <strong>Online</strong></span>
             </div>
 
             {{-- Stats cards --}}
-            <div class="row g-4 mb-4">
+            <div class="row mb-4">
                 <div class="col-md-3">
                     <div class="card card-custom p-3">
                         <h5>Total Games Count</h5>
@@ -35,7 +35,7 @@
                 <div class="col-md-3">
                     <div class="card card-custom p-3">
                         <h5>Game Platforms</h5>
-                        <p class="fs-3 text-light">{{ $categoryEntitiesCountMap['game_platgorms'] }}</p>
+                        <p class="fs-3 text-light">{{ $categoryEntitiesCountMap['game_platforms'] }}</p>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -47,33 +47,33 @@
             </div>
 
             {{-- Quick Actions --}}
-            <div class="row g-4">
+            <div class="row">
                 <div class="col-md-4">
                     <div class="card card-custom p-3">
                         <h5>Add a new game</h5>
                         <p>Quickly add new games to the site.</p>
-                        <a href="{{ route('admin.entities.create', ['entity' => 'games', 'slug' => 'game']) }}" class="button btn btn-light w-100">Add</a>
+                        <a href="{{ route('admin.entities.create', ['entity' => 'games', 'slug' => 'game']) }}" class="button btn btn-light w-100">{{ $t['general']['add'] }}</a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card card-custom p-3">
                         <h5>User management</h5>
                         <p>Editing and viewing all users.</p>
-                        <a href="{{ route('admin.categories.index', ['entity' => 'users']) }}" class="button btn btn-light w-100">Manage</a>
+                        <a href="{{ route('admin.categories.index', ['entity' => 'users']) }}" class="button btn btn-light w-100">{{ $t['general']['manage'] }}</a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card card-custom p-3">
                         <h5>System settings</h5>
                         <p>Change site settings and configurations.</p>
-                        <a href="#" class="button btn btn-light w-100">Manage</a>
+                        <a href="#" class="button btn btn-light w-100">{{ $t['general']['manage'] }}</a>
                     </div>
                 </div>
             </div>
 
             {{-- Table example --}}
             <div class="mt-5">
-                <h3>Latest games</h3>
+                <h3>{{ $t['admin']['latest_games'] }}</h3>
                 <div class="admin-custom-table-1 table table-dark table-striped mt-3">
                     <div>
                         <div>

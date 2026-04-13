@@ -2,24 +2,29 @@
 <div class="admin-card">
 
     <div>
-        <div class="">
-            <div class="d-none">
-                <label>Language:</label>
-                <select class="form-select form-select-sm" style="width: 150px;">
-                    <option value="en">English</option>
-                    <option value="es">Spanish</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                </select>
+            <div class="">
+                <form method="POST" action="{{ route('admin.lang.switch') }}" id="language-form">
+                    @csrf
+                    <label>{{ $t['general']['language'] }}:</label>
+                    <select name="locale" 
+                            class="form-select form-select-sm" 
+                            style="width: 150px;" 
+                            onchange="this.form.submit()">
+
+                        <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>{{ $t['general']['languages']['en'] }}</option>
+                        <option value="bg" {{ app()->getLocale() == 'bg' ? 'selected' : '' }}>{{ $t['general']['languages']['bg'] }}</option>
+                        <option value="ru" {{ app()->getLocale() == 'ru' ? 'selected' : '' }}>{{ $t['general']['languages']['ru'] }}</option>
+                    </select>
+                </form>
             </div>
 
             <hr class="my-3" />
 
             <div>
-                <form method="POST" action="{{ route('theme.change') }}">
+                <form method="POST" action="{{ route('admin.system.theme.change') }}">
                     @csrf
                     <div>
-                        <label for="theme-select">Theme:</label>
+                        <label for="theme-select">{{ $t['general']['theme'] }}:</label>
                         <select id="theme=select"
                             name="theme"
                             class="form-select form-select-sm"
@@ -32,8 +37,6 @@
                         </select>
                     </div>
                 </form>
-            </div>
-            
+            </div>  
     </div>
-
 </div>

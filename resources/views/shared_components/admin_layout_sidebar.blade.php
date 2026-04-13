@@ -8,37 +8,32 @@
 
         $menuItems = [
             'dashboard' => [
-                'label' => 'Dashboard',
+                'label' => $t['admin']['sidebar']['dashboard'],
                 'route' => 'admin.dashboard',
                 'params' => []
             ],
             'games' => [
-                'label' => 'Игри',
+                'label' => $t['admin']['sidebar']['games'],
                 'route' => 'admin.categories.index',
                 'params' => ['entity' => 'games']
             ],
             'game_platforms' => [
-                'label' => 'Платформи',
+                'label' => $t['admin']['sidebar']['game_platforms'],
                 'route' => 'admin.categories.index',
                 'params' => ['entity' => 'game_platforms']
             ],
             'categories' => [
-                'label' => 'Категории',
+                'label' => $t['admin']['sidebar']['categories'],
                 'route' => 'admin.categories.index',
                 'params' => ['entity' => 'categories']
             ],
-            'subcategories' => [
-                'label' => 'Подкатегории',
-                'route' => 'admin.categories.index',
-                'params' => ['entity' => 'subcategories']
-            ],
             'users' => [
-                'label' => 'Потребители',
+                'label' => $t['admin']['sidebar']['users'],
                 'route' => 'admin.categories.index',
                 'params' => ['entity' => 'users']
             ],
             'system_settings' => [
-                'label' => 'Системни настройки',
+                'label' => $t['admin']['sidebar']['settings'],
                 'route' => 'admin.categories.index',
                 'params' => ['entity' => 'system_settings']
             ],
@@ -54,6 +49,6 @@
     </div>
     <form action="{{ route('admin.logout') }}" method="POST" class="mt-auto px-3">
         @csrf
-        <button type="submit" class="btn w-100 logout-btn">Logout</button>
+        <button type="submit" class="btn w-100 logout-btn">{{ $t['general']['logout'] }}</button>
     </form>     
 </nav>

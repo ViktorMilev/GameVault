@@ -1,7 +1,6 @@
 @php
    //dd($gameData);
    $gameReviews = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-   $isLoggedIn = false;
 @endphp
 
 <div class=" text-white m-4 game-article-container">
@@ -86,9 +85,10 @@
     <div class="col-12" id="gameArticleReviewForm">
         <div class="bg-dark card p-3">
             <h5 class="card-title text-light mb-3">Write a New Review</h5>
-            @if(!$isLoggedIn)
-                <p class="text-light">Please <a href="{{ route('loginpage') }}">log in</a> to write a review.</p>
-            @else
+            @guest
+                <p class="text-light">Please <a href="{{ route('login') }}">log in</a> to write a review.</p>
+            @endguest
+            @auth
             <form action="#" method="POST">
                 @csrf
 
@@ -116,7 +116,7 @@
 
                 <button type="submit" class="btn btn-primary">Submit Review</button>
             </form>
-            @endif
+            @endauth
         </div>
     </div>
 </div>

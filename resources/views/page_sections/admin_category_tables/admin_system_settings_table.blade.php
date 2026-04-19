@@ -34,6 +34,7 @@
                             <option value="purple-default" {{ $currentTheme == 'purple-default' ? 'selected' : '' }}>Purple (Default)</option>
                             <option value="gray" {{ $currentTheme == 'gray' ? 'selected' : '' }}>Gray</option>
                             <option value="blue" {{ $currentTheme == 'blue' ? 'selected' : '' }}>Blue</option>
+                            <option value="green" {{ $currentTheme == 'green' ? 'selected' : '' }}>Green Lime</option>
                         </select>
                     </div>
                 </form>

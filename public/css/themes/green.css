@@ -1,0 +1,43 @@
+:root {
+    --neon-gradient-color-1: #4fff7a;
+    --neon-gradient-color-2: #6dff8e;
+    --neon-gradient-color-3: #91ff6e;
+    --neon-gradient-color-4: #b8ff9f;
+    --black: #000000;
+    --white: #FFFFFF;
+    --lightgray: #DCDCDC;
+    --darkgray: #1A1A1A;
+
+    --navbar-gradient: linear-gradient(#243128, #0f1411);
+    --button-gradient: linear-gradient(#91ff6e, #4fff7a);
+    --button-gradient-hover: linear-gradient(#b8ff9f, #6dff8e);
+
+    --page-gradient-red: linear-gradient(#000000, #3b1616);
+    --page-gradient-cyan: linear-gradient(#000000, #103b32);
+    --page-gradient-purple: linear-gradient(#000000, #223b16);
+    --page-gradient-orange: linear-gradient(#000000, #3b2d16);
+    --page-gradient-yellow: linear-gradient(#000000, #3b3816);
+    --page-gradient-green: linear-gradient(#000000, #16520a);
+    --page-gradient-blue: linear-gradient(#000000, #102a3b);
+
+    --light-gradient: linear-gradient(#f4fff0, #cfe8c8);
+
+    --game-box-shadow-color-1: rgba(145, 255, 110, 0.2);
+    --game-article-img-border-color-1: #91ff6e;
+    --game-article-img-box-shadow-color-1: #2a7a38;
+
+    --admin-primary-color-1: #1c3a22;
+    --admin-primary-color-2: #2f6b3b;
+    --admin-secondary-color-1: #243128;
+    --admin-tertiary-color: #e8ffe0;
+
+    --admin-header-color-1: #b8ff9f;
+
+    --admin-label-color-1: #d7ffd0;
+    --admin-label-color-2: #efffe9;
+
+    --general-input-color-1: #141a14;
+
+    --admin-table-odd-bg-rgb: 22, 46, 28;  
+    --admin-table-even-bg-rgb: 34, 68, 40;   
+}

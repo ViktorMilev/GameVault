@@ -7,6 +7,12 @@ p {
     color: var(--white);
 }
 
+.alert-sticky-msg1 { 
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
 .sidebar {
     background: linear-gradient(325deg, #16161d, var(--admin-primary-color-1));
     border-right: 3px solid;
@@ -108,3 +114,4 @@ p {
 .admin-custom-table-1 > div:nth-child(2) > div:nth-child(even) > div {
     background-color: rgba(var(--admin-table-even-bg-rgb), 0.7);
 }
+

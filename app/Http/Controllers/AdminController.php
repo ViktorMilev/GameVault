@@ -18,10 +18,10 @@ use App\Services\HomepageService;
 
 class AdminController extends Controller
 {
-    protected $adminEmailAddress;
-    protected $adminPassword;
     protected $adminService;
     protected $homepageService;
+    protected $adminEmailAddress;
+    protected $adminPassword;
 
     public function __construct(AdminService $adminService, HomepageService $homepageService) {
         $this->adminService = $adminService;
@@ -30,69 +30,6 @@ class AdminController extends Controller
         $adminPassword = env('ADMIN_PASSWORD', '');
     }
 
-    public function signInPage() {
-        $pageTitle = 'Admin Sign In';
-    
-        return view('pages.admin.sign_in', 
-            compact(
-                'pageTitle'
-            )
-        );
-    }
-
-    public function loginPage() {
-        $pageTitle = 'Admin Login';
-    
-        return view('pages.admin.login', 
-            compact(
-                'pageTitle'
-            )
-        );
-    }
-
-    public function register(Request $request)
-    {
-        $validated = $request->validate([
-            'username' => 'required|string|max:255|unique:users,username',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = User::create([
-            'username' => $validated['username'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        return redirect()->route('admin.login')
-                ->with('success', 'Account created successfully.');
-    }
-
-    public function login(Request $request) {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->withErrors(['email' => 'Invalid credentials']);
-        }
-
-        $request->session()->put('is_admin', true);
-        $request->session()->regenerate();
-
-        return redirect()->route('admin.dashboard');
-    }
-
-    public function logout(Request $request) {
-        $request->session()->forget('is_admin');
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->route('admin.login');
-    }
 
     public function dashboard(Request $request) {
         $pageTitle = 'Dashboard';
@@ -157,6 +94,19 @@ class AdminController extends Controller
         );
     }
 
+    public function entityCreatePage() {
+        return view('pages.admin.entity_create_page', 
+            compact(
+                'pageTitle',
+                'gameCategories',
+                'gameSubcategories',
+                'gamePlatforms',
+                'entityData',
+                'entityBladeFileName'
+            )
+        );
+    }
+
     public function entityEditPage($entity, $slug) {
         $pageTitle = 'Edit ';
         $entityData = null;
@@ -203,7 +153,6 @@ class AdminController extends Controller
         );
     }
 
-
     public function updateEntityData(Request $request, $entity, $slug)
     {
         switch ($entity) {
@@ -219,4 +168,73 @@ class AdminController extends Controller
                 abort(404, 'Entity type not found.');
         }
     }
+
+    public function deleteEntity() {
+        return view('pages.admin.entity_create_page', 
+            compact(
+                'pageTitle',
+                'gameCategories',
+                'gameSubcategories',
+                'gamePlatforms',
+                'entityData',
+                'entityBladeFileName'
+            )
+        );
+    }
+
+
+
+    // AUTHENTICATION
+
+    public function signUpPage() {
+        $pageTitle = 'Admin Sign Up';
+    
+        return view('pages.admin.sign_up', 
+            compact(
+                'pageTitle'
+            )
+        );
+    }
+
+    public function loginPage() {
+        $pageTitle = 'Admin Login';
+    
+        return view('pages.admin.login', 
+            compact(
+                'pageTitle'
+            )
+        );
+    }
+
+    public function login(Request $request, $adminPage = false) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['email' => 'Invalid credentials']);
+        }
+
+        if ($user->is_admin === 'false') {
+            return back()->withErrors(['auth' => 'Only administrators are allowed access to this page!']);
+        }
+
+        Auth::login($user);
+
+        $request->session()->put('is_admin', true);
+        $request->session()->regenerate();
+
+        return redirect()->route('admin.dashboard');
+    }
+
+    public function logout(Request $request) {
+        $request->session()->forget('is_admin');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login')->with('success', trans('auth.messages.logout'));
+    }            
 }

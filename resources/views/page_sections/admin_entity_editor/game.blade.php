@@ -2,11 +2,11 @@
 
 <div class="content flex-grow-1">
         @if (session('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-sticky-msg1">
                 {{ session('success') }}
             </div>
         @elseif (session('error'))
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-sticky-msg1">
                 {{ session('error') }}
             </div>
         @endif

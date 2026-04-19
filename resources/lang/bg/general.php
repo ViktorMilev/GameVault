@@ -17,7 +17,7 @@ return [
     'manage' => 'Управление',
     'login' => 'Вход',
     'logout' => 'Изход',
-    'sign_in' => 'Влез',
+    'sign_up' => 'Влез',
     'navbar' => [
         'home' => 'Начало',
         'categories' => 'Категории',

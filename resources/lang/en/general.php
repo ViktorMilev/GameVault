@@ -17,7 +17,7 @@ return [
     'manage' => 'Manage',
     'login' => 'Login',
     'logout' => 'Logout',
-    'sign_in' => 'Sign In',
+    'sign_up' => 'Sign In',
     'navbar' => [
         'home' => 'Home',
         'categories' => 'Categories',

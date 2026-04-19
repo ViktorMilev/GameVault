@@ -30,7 +30,13 @@
     --admin-primary-color-2: #542384;
     --admin-primary-color-3: #4c1c7c;
 
+    --admin-primary-rgb-1: 73, 15, 116;
+    --admin-primary-rgb-2: 84, 35, 132;
+    --admin-primary-rgb-3: 76, 28, 124;
+    --admin-secondary-color-rgb-2: 164, 133, 193;
+
     --admin-secondary-color-1: #2b2b4a;
+    --admin-secondary-color-2: #a485c1;
     --admin-tertiary-color: #e6ccff;
 
     --admin-header-color-1: #c084fc;

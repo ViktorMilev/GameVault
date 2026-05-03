@@ -11,6 +11,14 @@ return [
         'users' => 'Users',
         'settings' => 'System Settings',
     ],
+    'entity_create_page' => [
+        'page_headers' => [
+            'game' => 'Create New Game',
+            'user' => 'Create New User',
+            'game_platform' => 'Create New Game Platform',
+            'game_category' => 'Create New Category',
+        ],
+    ],
     'entity_edit_page' => [
         'page_headers' => [
             'game' => 'Редакция на игра',

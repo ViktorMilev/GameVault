@@ -55,7 +55,6 @@
                                     action="{{ route('admin.entities.delete', ['entity' => 'users', 'slug' => $user->username]) }}"
                                     onsubmit="return confirm('Delete this game?')">
                                     @csrf
-                                    @method('DELETE')
 
                                     <button type="submit" class="dropdown-item text-danger">
                                         {{ $t['general']['delete'] }}

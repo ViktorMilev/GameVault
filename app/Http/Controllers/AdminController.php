@@ -94,7 +94,40 @@ class AdminController extends Controller
         );
     }
 
-    public function entityCreatePage() {
+    public function entityCreatePage($entity, $slug = null) {
+        $pageTitle = 'Create A New ';
+        $entityData = null;
+
+        switch ($entity) {
+            case 'games':
+                $pageTitle .= 'Game';
+                $entityBladeFileName = 'game';
+                $entityData = $this->homepageService->fetchEntityBySlug(Game::class, 'slug', $slug);
+                break;
+            case 'game_platforms':
+                $pageTitle .= 'Game Platform';
+                $entityBladeFileName = 'game_platform';
+                $entityData = $this->homepageService->fetchEntityBySlug(Platform::class, 'slug', $slug);
+                break;
+            case 'categories':
+                $pageTitle .= 'Category';
+                $entityBladeFileName = 'game_category';
+                $entityData = $this->homepageService->fetchEntityBySlug(Category::class, 'id', $slug);
+                break;
+            case 'users':
+                $pageTitle .= 'User';
+                $entityBladeFileName = 'user';
+                $entityData = $this->homepageService->fetchEntityBySlug(User::class, 'username', $slug);
+                break;
+            default:
+                abort(404, 'Entity type not found.');
+        }
+
+        $gameCategories = $this->homepageService->fetchCategories();
+        $gameSubcategories = $this->homepageService->fetchSubcategories();
+        $gamePlatforms = $this->homepageService->fetchAllGamePlatforms();        
+
+        
         return view('pages.admin.entity_create_page', 
             compact(
                 'pageTitle',
@@ -118,7 +151,7 @@ class AdminController extends Controller
                 $entityData = $this->homepageService->fetchEntityBySlug(Game::class, 'slug', $slug);
                 break;
             case 'game_platforms':
-                $pageTitle .= 'Game';
+                $pageTitle .= 'Game Platform';
                 $entityBladeFileName = 'game_platform';
                 $entityData = $this->homepageService->fetchEntityBySlug(Platform::class, 'slug', $slug);
                 break;
@@ -153,6 +186,21 @@ class AdminController extends Controller
         );
     }
 
+    public function addEntityData(Request $request, $entity, $slug) {
+        switch ($entity) {
+            case 'games':
+                return $this->adminService->addGame($request, $slug);
+            case 'game_platforms':
+                //return $this->adminService->addGamePlatform($request, $slug);
+            case 'categories':
+                //return $this->adminService->addGameCategory($request, $slug);
+            case 'users':
+                //return $this->adminService->addUser($request, $slug);
+            default:
+                abort(404, 'Entity type not found.');
+        } 
+    }
+
     public function updateEntityData(Request $request, $entity, $slug)
     {
         switch ($entity) {
@@ -169,17 +217,24 @@ class AdminController extends Controller
         }
     }
 
-    public function deleteEntity() {
-        return view('pages.admin.entity_create_page', 
-            compact(
-                'pageTitle',
-                'gameCategories',
-                'gameSubcategories',
-                'gamePlatforms',
-                'entityData',
-                'entityBladeFileName'
-            )
-        );
+    public function deleteEntity(Request $request, $entity, $slug) {
+        $entityName = '';
+        switch ($entity) {
+            case 'games':
+                $entityName = 'Game';
+                Game::where('slug', $slug)->delete();
+                break;
+            case 'game_platforms':
+                return $this->adminService->deleteGamePlatform($slug);
+            case 'categories':
+                return $this->adminService->deleteGameCategory($slug);
+            case 'users':
+                return $this->adminService->deleteUser($slug);
+            default:
+                abort(404, 'Entity type not found.');
+        }
+
+        return redirect()->back()->with('success', $entityName . ' deleted successfully.');
     }
 
 

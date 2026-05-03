@@ -56,10 +56,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/{entity}', [AdminController::class, 'categoriesIndexPage'])->name('admin.categories.index');
         Route::get('/{entity}/new-{slug}', [AdminController::class, 'entityCreatePage'])->name('admin.entities.create');
         Route::get('/{entity}/edit/{slug}', [AdminController::class, 'entityEditPage'])->name('admin.entities.edit');
-        Route::get('/{entity}/delete/{slug}', [AdminController::class, 'deleteEntity'])->name('admin.entities.delete');
         Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
+
+        // Actions
+        Route::post('/{entity}/edit/{slug}/store-data', [AdminController::class, 'addEntityData'])->name('admin.entities.store');
         Route::post('/{entity}/edit/{slug}/update-data', [AdminController::class, 'updateEntityData'])->name('admin.entities.update');
+        Route::post('/{entity}/delete/{slug}', [AdminController::class, 'deleteEntity'])->name('admin.entities.delete');
 
 
         Route::post('lang/switch', function (Request $request) {

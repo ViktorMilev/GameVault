@@ -10,7 +10,11 @@ use App\Models\GamePlatform;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+
 
 class AdminService
 {
@@ -29,6 +33,79 @@ class AdminService
 
 
     
+
+
+    public function addGame(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
+            'short_description' => 'nullable|string',
+            'description' => 'required|string|max:255',
+            'category_id' => 'nullable|integer',
+            'subcategory_id' => 'nullable|integer',
+            'platforms' => 'nullable|array',
+            'trailer_url' => 'nullable|url',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $newData = [
+            'name' => $validated['title'],
+            'slug' => $validated['slug'] ?? Str::slug($validated['title']),
+            //'short_description' => 'short_description',
+            'description' => $validated['description'] ?? '',
+            'category_id' => $validated['category_id'] ?? 0,
+            'subcategory_id' => $validated['subcategory_id'] ?? 0,
+            //'trailer_url' => 'trailer_url',
+            'cover_image' => '',
+            'developer' => '',
+            'publisher' => '',
+            'release_date' => Carbon::now(),
+            //'meta_title' => 'meta_title',
+            //'meta_description' => 'meta_description',
+        ];
+
+        if ($request->hasFile('thumbnail')) {
+            $thumbnailFile = null;
+
+            foreach ($request->file('gallery') as $file) {
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->storeAs('public/images/game_covers', $filename);
+                $thumbnailFile = $filename;
+            }
+
+            $newData['cover_image'] = $thumbnailFile;
+        }
+
+        if ($request->hasFile('gallery')) {
+            $galleryFiles = [];
+
+            foreach ($request->file('gallery') as $file) {
+                $filename = uniqid() . '_' . $file->getClientOriginalName();
+                $file->storeAs('public/images/game_galleries/game' . '___' . $newData['slug'], $filename);
+                $galleryFiles[] = $filename;
+            }
+
+            //$newData['gallery'] = $galleryFiles;
+        }
+
+        DB::transaction(function() use ($newData, $validated, &$game) {
+            $game = Game::create($newData);
+
+            if (!empty($validated['platforms'])) {
+                $game->platforms()->sync($validated['platforms']);
+            }
+        });
+
+
+        return redirect('/admin/games/new-game')->with('success', 'Game added successfully.');
+    }
 
     public function updateGame(Request $request, $slug) {
         $request->validate([

@@ -201,6 +201,10 @@ button:hover {
     outline: none !important;
 }
 
+.form-control::placeholder {
+    color: #d8d8d8 !important;
+}
+
 .form-control:focus {
     border-color: transparent !important;
     box-shadow: none !important;

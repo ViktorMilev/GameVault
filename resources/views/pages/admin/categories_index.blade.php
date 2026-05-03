@@ -92,6 +92,12 @@
                 @endif
             </div>
 
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             @if($currentTable)
                 @include($currentTable)
             @endif

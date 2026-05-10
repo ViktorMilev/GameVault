@@ -22,7 +22,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['title'] }}</label>
-                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="Title of the game">
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['title'] }}">
                     @error('title')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -30,7 +30,7 @@
 
                 <div class="col-md-6">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['slug'] }}</label>
-                    <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}" placeholder="URL-friendly identifier (e.g. 'my-awesome-game')">
+                    <input type="text" name="slug" class="form-control @error('slug') is-invalid @enderror" value="{{ old('slug') }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['slug'] }}">
                     @error('slug')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -39,7 +39,7 @@
 
             <div class="mb-3">
                 <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['short_description'] }}</label>
-                <textarea name="short_description" rows="3" class="form-control @error('short_description') is-invalid @enderror" placeholder="Short description...">{{ old('short_description') }}</textarea>
+                <textarea name="short_description" rows="3" class="form-control @error('short_description') is-invalid @enderror" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['short_description'] }}">{{ old('short_description') }}</textarea>
                 @error('short_description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -47,7 +47,7 @@
 
             <div class="mb-4">
                 <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['description'] }}</label>
-                <textarea name="description" rows="6" class="form-control @error('description') is-invalid @enderror" placeholder="Longer detailed description of the game...">{{ old('description') }}</textarea>
+                <textarea name="description" rows="6" class="form-control @error('description') is-invalid @enderror" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['description'] }}">{{ old('description') }}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -56,7 +56,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['developer'] }}</label>
-                    <input type="text" name="developer" class="form-control @error('developer') is-invalid @enderror" value="{{ old('developer') }}" placeholder="Developer of the game">
+                    <input type="text" name="developer" class="form-control @error('developer') is-invalid @enderror" value="{{ old('developer') }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['developer'] }}">
                     @error('developer')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -64,7 +64,7 @@
 
                 <div class="col-md-6">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['publisher'] }}</label>
-                    <input type="text" name="publisher" class="form-control @error('publisher') is-invalid @enderror" value="{{ old('publisher') }}" placeholder="Publisher of the game">
+                    <input type="text" name="publisher" class="form-control @error('publisher') is-invalid @enderror" value="{{ old('publisher') }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['publisher'] }}">
                     @error('publisher')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -129,6 +129,7 @@
                 @enderror
             </div>
 
+            {{-- 
             <div class="mb-3">
                 <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['gallery_images'] }}</label>
                 <input type="file" class="form-control @error('gallery') is-invalid @enderror" name="gallery[]" multiple>
@@ -136,10 +137,11 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            --}}
 
             <div class="mb-4">
                 <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['trailer_url'] }}</label>
-                <input type="text" class="form-control @error('trailer_url') is-invalid @enderror" name="trailer_url" value="{{ old('trailer_url') }}" placeholder="URL of the game's trailer video (e.g. YouTube link)">
+                <input type="text" class="form-control @error('trailer_url') is-invalid @enderror" name="trailer_url" value="{{ old('trailer_url') }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['trailer_url'] }}">
                 @error('trailer_url')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -149,7 +151,7 @@
 
             <div class="mb-3">
                 <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['seo_title'] }}</label>
-                <input type="text" class="form-control @error('meta_title') is-invalid @enderror" name="meta_title" value="{{ old('meta_title') }}" placeholder="Optional SEO title (if different from main title)">
+                <input type="text" class="form-control @error('meta_title') is-invalid @enderror" name="meta_title" value="{{ old('meta_title') }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['seo_title'] }}">
                 @error('meta_title')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -157,7 +159,7 @@
 
             <div class="mb-4">
                 <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['seo_description'] }}</label>
-                <textarea rows="3" class="form-control @error('meta_description') is-invalid @enderror" name="meta_description" placeholder="Optional SEO description">{{ old('meta_description') }}</textarea>
+                <textarea rows="3" class="form-control @error('meta_description') is-invalid @enderror" name="meta_description" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['seo_description'] }}">{{ old('meta_description') }}</textarea>
                 @error('meta_description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

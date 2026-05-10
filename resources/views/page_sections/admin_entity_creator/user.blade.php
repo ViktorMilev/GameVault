@@ -14,7 +14,7 @@
 
         <div class="card card-custom p-4" style="background-color: var(--darkgray);">
 
-            <form method="POST" action="{{ route('admin.entities.update', ['entity' => $entity, 'slug' => $slug]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.entities.store', ['entity' => $entity, 'slug' => $slug]) }}" enctype="multipart/form-data">
                 @csrf
 
                 <h4 class="section-title">{{ $t['admin']['entity_edit_page']['sections']['basic_info'] }}</h4>
@@ -22,11 +22,11 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['username'] }}</label>
-                        <input type="text" name="username" class="form-control" value="{{ $entityData->username ?? 'N/A' }}">
+                        <input type="text" name="username" class="form-control" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['username'] }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['email'] }}</label>
-                        <input type="email" name="email" class="form-control" value="{{ $entityData->email ?? 'N/A' }}">
+                        <input type="email" name="email" class="form-control" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['email'] }}">
                     </div>
                 </div>
 

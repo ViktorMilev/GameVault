@@ -1,12 +1,21 @@
 @php
    //dd($gameData);
-   $gameReviews = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+   $gameReviews = [1, 2, 3, 4];
 @endphp
 
-<div class=" text-white m-4 game-article-container">
+<div class="text-white m-4 game-article-container">
+    @php
+        $gameCoverImage = $gameData[0]['cover_image'];
+
+        if ($gameCoverImage) {
+            $gameCoverImage = asset(Config::get('site_vars.cover_url') . '/' . $gameCoverImage);
+        } else {
+            $gameCoverImage = asset(Config::get('site_vars.cover_url') . '/placeholder.jpg');
+        }
+    @endphp
     <div class="row align-items-start mb-4">
         <div class="col-md-4">
-            <img src="{{ asset('/images/game_covers/' . $gameData[0]['cover_image']) }}" alt="{{ $gameData[0]['name'] }}" class="game-article-img w-100">
+            <img src="{{ $gameCoverImage }}" alt="{{ $gameData[0]['name'] }}" class="game-article-img w-100">
         </div>
         <div class="col-md-8 px-4">
             <!-- insert a long mini-list row-col of game parameters here -->
@@ -89,7 +98,7 @@
                 <p class="text-light">Please <a href="{{ route('login') }}">log in</a> to write a review.</p>
             @endguest
             @auth
-            <form action="#" method="POST">
+            <form action="{{ route('user.review.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">

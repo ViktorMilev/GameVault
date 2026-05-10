@@ -1,8 +1,8 @@
 :root {
-    --neon-gradient-color-1: #FF0000;
-    --neon-gradient-color-2: #FFA500;
-    --neon-gradient-color-3: #FFFF00;
-    --neon-gradient-color-4: #FF00FF;
+    --neon-gradient-color-1: #7a00ff;
+    --neon-gradient-color-2: #00e5ff; 
+    --neon-gradient-color-3: #ff00cc;
+    --neon-gradient-color-4: #1d076e;
     --black: #000000;
     --white: #FFFFFF;
     --lightgray: #DCDCDC;

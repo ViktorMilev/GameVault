@@ -34,6 +34,9 @@ class HomeController extends Controller
         $pageTitle = null;
         $categories = $this->homepageService->fetchCategoriesAndSubcategories();
         $gameData = $this->homepageService->fetchGameByName($slug);
+
+        abort_if(empty($gameData) || !isset($gameData[0]), 404, 'Game not found');
+
         $pageTitle = $gameData[0]->name ?? 'Игра без име';
         $navbarItems = $this->homepageService->fetchNavbarItems(app('t'));
         

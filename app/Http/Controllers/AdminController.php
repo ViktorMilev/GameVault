@@ -81,6 +81,7 @@ class AdminController extends Controller
         $games = $this->homepageService->fetchAllGames();
         $gamePlatforms = $this->homepageService->fetchAllGamePlatforms();
         $gameCategories = $this->homepageService->fetchCategoriesAndSubcategories();
+        $subcategories = Subcategory::with('category')->get();
         $users = $this->homepageService->fetchAllUsers();
     
         return view('pages.admin.categories_index', 
@@ -89,6 +90,7 @@ class AdminController extends Controller
                 'games',
                 'gamePlatforms',
                 'gameCategories',
+                'subcategories',
                 'users'
             )
         );
@@ -104,7 +106,7 @@ class AdminController extends Controller
                 $entityBladeFileName = 'game';
                 $entityData = $this->homepageService->fetchEntityBySlug(Game::class, 'slug', $slug);
                 break;
-            case 'game_platforms':
+            case 'platforms':
                 $pageTitle .= 'Game Platform';
                 $entityBladeFileName = 'game_platform';
                 $entityData = $this->homepageService->fetchEntityBySlug(Platform::class, 'slug', $slug);
@@ -113,6 +115,11 @@ class AdminController extends Controller
                 $pageTitle .= 'Category';
                 $entityBladeFileName = 'game_category';
                 $entityData = $this->homepageService->fetchEntityBySlug(Category::class, 'id', $slug);
+                break;
+            case 'subcategories':
+                $pageTitle .= 'Subcategory';
+                $entityBladeFileName = 'game_subcategory';
+                $entityData = $this->homepageService->fetchEntityBySlug(Subcategory::class, 'id', $slug);
                 break;
             case 'users':
                 $pageTitle .= 'User';
@@ -130,6 +137,7 @@ class AdminController extends Controller
         
         return view('pages.admin.entity_create_page', 
             compact(
+                'slug',
                 'pageTitle',
                 'gameCategories',
                 'gameSubcategories',
@@ -159,6 +167,11 @@ class AdminController extends Controller
                 $pageTitle .= 'Category';
                 $entityBladeFileName = 'game_category';
                 $entityData = $this->homepageService->fetchEntityBySlug(Category::class, 'id', $slug);
+                break;
+            case 'subcategories':
+                $pageTitle .= 'Subcategory';
+                $entityBladeFileName = 'game_category';
+                $entityData = $this->homepageService->fetchEntityBySlug(Subcategory::class, 'id', $slug);
                 break;
             case 'users':
                 $pageTitle .= 'User';
@@ -190,12 +203,14 @@ class AdminController extends Controller
         switch ($entity) {
             case 'games':
                 return $this->adminService->addGame($request, $slug);
-            case 'game_platforms':
-                //return $this->adminService->addGamePlatform($request, $slug);
+            case 'platforms':
+                return $this->adminService->addGamePlatform($request, $slug);
             case 'categories':
-                //return $this->adminService->addGameCategory($request, $slug);
+                return $this->adminService->addGameCategory($request, $slug);
+            case 'subcategories':
+                return $this->adminService->addGameSubcategory($request, $slug);
             case 'users':
-                //return $this->adminService->addUser($request, $slug);
+                return $this->adminService->addUser($request, $slug);
             default:
                 abort(404, 'Entity type not found.');
         } 
@@ -210,6 +225,8 @@ class AdminController extends Controller
                 return $this->adminService->updateGamePlatform($request, $slug);
             case 'categories':
                 return $this->adminService->updateGameCategory($request, $slug);
+            case 'subcategories':
+                return $this->adminService->updateGameSubcategory($request, $slug);
             case 'users':
                 return $this->adminService->updateUser($request, $slug);
             default:
@@ -222,14 +239,62 @@ class AdminController extends Controller
         switch ($entity) {
             case 'games':
                 $entityName = 'Game';
-                Game::where('slug', $slug)->delete();
+                $game = Game::where('slug', $slug)->first();
+
+                if (!$game) {
+                    return redirect()->back()->with('error', 'Game not found.');
+                }
+
+                if (!empty($game->cover_image)) {   
+                    $coverImagePath = public_path('images/game_covers/' . $game->cover_image);
+                    $result = unlink($coverImagePath);
+                    if (file_exists($coverImagePath)) {
+                        unlink($coverImagePath);
+                    }
+                }
+
+                $game->delete();
+
                 break;
             case 'game_platforms':
-                return $this->adminService->deleteGamePlatform($slug);
+                $entityName = 'Game Platform';
+                $gamePlatform = Platform::where('slug', $slug)->first();
+                if (!$gamePlatform) {
+                    return redirect()->back()->with('error', 'Game platform not found.');
+                }
+
+                $gamePlatform->delete();
+                break;
             case 'categories':
-                return $this->adminService->deleteGameCategory($slug);
+                $entityName = 'Category';
+                $category = Category::where('id', $slug)->first();
+
+                if (!$category) {
+                    return redirect()->back()->with('error', 'Category not found.');
+                }
+
+                $category->delete();
+                break;
+            case 'subcategories':
+                $entityName = 'Subcategory';
+                $subcategory = Subcategory::where('id', $slug)->first();
+
+                if (!$subcategory) {
+                    return redirect()->back()->with('error', 'Subcategory not found.');
+                }
+
+                $subcategory->delete();
+                break;
             case 'users':
-                return $this->adminService->deleteUser($slug);
+                $entityName = 'User';
+                $user = User::where('username', $slug)->first();
+
+                if (!$user) {
+                    return redirect()->back()->with('error', 'User not found.');
+                }
+
+                $user->delete();
+                break;
             default:
                 abort(404, 'Entity type not found.');
         }

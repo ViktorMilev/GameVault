@@ -5,10 +5,19 @@
   @endif
 
   @foreach($games as $game)
+      @php
+        $gameCoverImage = $game->cover_image;
+
+        if ($gameCoverImage) {
+            $gameCoverImage = asset(Config::get('site_vars.cover_url') . '/' . $gameCoverImage);
+        } else {
+            $gameCoverImage = asset(Config::get('site_vars.cover_url') . '/placeholder.jpg');
+        }
+      @endphp
       <div class="game-box">
         <a href="{{ route('game.article', ['slug' => $game->slug]) }}">
           <div class="cover">
-            <img src="{{ asset(Config::get('site_vars.cover_url') . '/' . $game->cover_image) }}" alt="{{ $game->name }}">
+            <img src="{{ $gameCoverImage }}" alt="{{ $game->name }}">
           </div>
           <div class="info">
             <h3 class="game-name">{{ $game->name }}</h3>

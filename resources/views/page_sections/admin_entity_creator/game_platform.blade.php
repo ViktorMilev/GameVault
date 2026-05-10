@@ -10,11 +10,11 @@
             </div>
         @endif
 
-        <h2 class="mb-4 page-header">{{ $t['admin']['entity_edit_page']['page_headers']['game_platform'] }}</h2>
+        <h2 class="mb-4 page-header">{{ $t['admin']['entity_create_page']['page_headers']['game_platform'] }}</h2>
 
         <div class="card card-custom p-4" style="background-color: var(--darkgray);">
 
-            <form method="POST" action="{{ route('admin.entities.update', ['entity' => $entity, 'slug' => $slug]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.entities.store', ['entity' => $entity, 'slug' => $slug]) }}" enctype="multipart/form-data">
                 @csrf
 
                 <h4 class="section-title">{{ $t['admin']['entity_edit_page']['sections']['basic_info'] }}</h4>
@@ -22,11 +22,11 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['title'] }}</label>
-                        <input type="text" name="name" class="form-control" value="{{ $entityData->name ?? 'N/A' }}">
+                        <input type="text" name="name" class="form-control" placeholder="{{ $t['admin']['entity_edit_page']['fields']['title'] }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['slug'] }}</label>
-                        <input type="text" name="slug" class="form-control" value="{{ $entityData->slug ?? 'N/A' }}">
+                        <input type="text" name="slug" class="form-control" placeholder="{{ $t['admin']['entity_edit_page']['fields']['slug'] }}">
                     </div>
                 </div>
 
@@ -36,14 +36,14 @@
                     <div class="mb-3">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['current_avatar'] }}</label>
                         <div>
-                            <img src="{{ asset('storage/' . $entityData->avatar) }}" alt="Profile Image" class="img-thumbnail" style="max-width: 150px;">
+                            <img src="{{ asset('storage/' . $entityData->avatar) }}" alt="Platform Icon" class="img-thumbnail" style="max-width: 150px;">
                         </div>
                     </div>
                 @endif
 
                 <div class="mb-4">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['upload_avatar'] }}</label>
-                    <input type="file" class="form-control" name="avatar" accept="image/*">
+                    <input type="file" class="form-control" name="thumbnail" accept="image/*">
                     <small class="form-text text-muted">Leave empty to keep current image. Supported formats: JPG, PNG, GIF.</small>
                 </div>
 

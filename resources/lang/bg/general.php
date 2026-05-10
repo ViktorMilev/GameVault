@@ -8,6 +8,7 @@ return [
     'confirm_password' => 'Потвърди паролата',
     'create_account' => 'Създай нов акаунт',
     'login_prompt' => 'Вече имате акаунт?',
+    'create_new' => 'Създай нов/а',
     'add' => 'Добави',
     'edit' => 'Редактирай',
     'delete' => 'Изтрий',

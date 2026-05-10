@@ -43,17 +43,19 @@
                                 </a>
                             </li>
 
+                            {{--
                             <li>
                                 <a href="{{ route('game.article', $user->username) }}" class="dropdown-item"
                                     target="_blank">
                                     {{ $t['general']['view'] }}
                                 </a>
                             </li>
+                            --}}
 
                             <li>
                                 <form method="POST"
                                     action="{{ route('admin.entities.delete', ['entity' => 'users', 'slug' => $user->username]) }}"
-                                    onsubmit="return confirm('Delete this game?')">
+                                    onsubmit="return confirm('Delete this user?')">
                                     @csrf
 
                                     <button type="submit" class="dropdown-item text-danger">

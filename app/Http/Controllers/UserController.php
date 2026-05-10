@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+
 use Illuminate\Support\Carbon;
+
+
 use App\Models\Game;
 use App\Models\Category;
 use App\Models\Subcategory;
@@ -83,5 +88,47 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login')->with('success', trans('auth.messages.logout'));
+    }
+
+
+    public function profile() {
+        $pageTitle = 'User Profile';
+    
+        return view('pages.profile', 
+            compact(
+                'pageTitle'
+            )
+        );
+    }
+
+    public function updateProfile() {
+
+    }
+
+    public function changePassword() {
+
+    }
+
+    public function deleteAccount() {
+
+    }
+
+
+    public function storeUserReview(Request $request) {
+        $validate = Validator::make($request->all(), [
+            //'game_id' => 'required|exists:games,id',
+            'rating' => 'required|in:1,2,3,4,5',
+            'text' => 'nullable|string|max:1000',
+        ]);
+
+        $validate->validate();
+
+        $reviewText = $request->input('text');
+
+        dd($reviewText);
+
+        #TODO: Store the review in the database, associating it with the authenticated user and the specified game.
+
+        return response('success', 200);
     }
 }

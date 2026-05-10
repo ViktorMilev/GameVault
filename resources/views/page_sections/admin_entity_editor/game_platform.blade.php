@@ -36,14 +36,14 @@
                     <div class="mb-3">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['current_avatar'] }}</label>
                         <div>
-                            <img src="{{ asset('storage/' . $entityData->avatar) }}" alt="Profile Image" class="img-thumbnail" style="max-width: 150px;">
+                            <img src="{{ asset('storage/' . $entityData->avatar) }}" alt="Platform Icon" class="img-thumbnail" style="max-width: 150px;">
                         </div>
                     </div>
                 @endif
 
                 <div class="mb-4">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['upload_avatar'] }}</label>
-                    <input type="file" class="form-control" name="avatar" accept="image/*">
+                    <input type="file" class="form-control" name="thumbnail" accept="image/*">
                     <small class="form-text text-muted">Leave empty to keep current image. Supported formats: JPG, PNG, GIF.</small>
                 </div>
 

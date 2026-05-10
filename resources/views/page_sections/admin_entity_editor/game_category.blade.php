@@ -10,7 +10,18 @@
             </div>
         @endif
 
-        <h2 class="mb-4 page-header">{{ $t['admin']['entity_edit_page']['page_headers']['game_category'] }}</h2>
+        @php
+            $pageTitle = '';
+            if ($entity === 'categories') {
+                $pageTitle = $t['admin']['entity_edit_page']['page_headers']['game_category'];
+            }
+            
+            if ($entity === 'subcategories') {
+                $pageTitle = $t['admin']['entity_edit_page']['page_headers']['game_subcategory'];
+            }
+        @endphp
+
+        <h2 class="mb-4 page-header">{{ $pageTitle }}</h2>
 
         <div class="card card-custom p-4" style="background-color: var(--darkgray);">
 

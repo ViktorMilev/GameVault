@@ -22,11 +22,11 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['username'] }}</label>
-                        <input type="text" name="username" class="form-control" value="{{ $entityData->username ?? 'N/A' }}">
+                        <input type="text" name="username" class="form-control" value="{{ $entityData->username ?? 'N/A' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['username'] }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['email'] }}</label>
-                        <input type="email" name="email" class="form-control" value="{{ $entityData->email ?? 'N/A' }}">
+                        <input type="email" name="email" class="form-control" value="{{ $entityData->email ?? 'N/A' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['email'] }}">
                     </div>
                 </div>
 

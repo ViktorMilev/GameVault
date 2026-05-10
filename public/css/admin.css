@@ -91,7 +91,13 @@ p {
 
 .admin-custom-table-1 > div > div {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);}
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.admin-custom-table-1 > div > div.cols-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
 
 .admin-custom-table-1 > div:first-child {
     border-bottom: 1px solid;

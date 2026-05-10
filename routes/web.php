@@ -45,6 +45,9 @@ Route::post('/login', [UserController::class, 'login'])->name('login.auth');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 
+Route::post('/user-review/store', [UserController::class, 'storeUserReview'])->name('user.review.store');
+
+
 Route::prefix('admin')->group(function () {
     Route::get('/sign-up', [AdminController::class, 'signUpPage'])->name('admin.signup');
     Route::post('/sign-up', [AdminController::class, 'register'])->name('admin.signup.auth');

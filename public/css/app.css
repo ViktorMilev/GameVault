@@ -243,6 +243,11 @@ nav.navbar a.nav-link.active,
     text-shadow: var(--white) 0px 0px 10px;
 }
 
+li[role="presentation"] .nav-link.active {
+    background: linear-gradient(var(--admin-primary-color-1), var(--admin-primary-color-2)) !important;
+    color: #ffce67 !important;
+}
+
 div#navbarNavDropdown, .navbar-nav {
     gap: 20px;
 }

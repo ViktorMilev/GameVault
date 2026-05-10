@@ -23,32 +23,32 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['title'] }}</label>
-                        <input type="text" name="title" class="form-control" value="{{ $entityData->name ?? 'N/A' }}">
+                        <input type="text" name="title" class="form-control" value="{{ $entityData->name ?? '' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['title'] }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['slug'] }}</label>
-                        <input type="text" name="slug" class="form-control" value="{{ $entityData->slug ?? 'N/A' }}">
+                        <input type="text" name="slug" class="form-control" value="{{ $entityData->slug ?? '' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['slug'] }}">
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['short_description'] }}</label>
-                    <textarea name="short_description" rows="3" class="form-control">{{ $entityData->description ?? 'N/A' }}</textarea>
+                    <textarea name="short_description" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['short_description'] }}" rows="3" class="form-control">{{ $entityData->short_description ?? '' }}</textarea>
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['description'] }}</label>
-                    <textarea name="description" rows="6" class="form-control">Long detailed description of the game...</textarea>
+                    <textarea name="description" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['description'] }}" rows="6" class="form-control">{{ $entityData->description ?? '' }}</textarea>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['developer'] }}</label>
-                        <input type="text" name="developer" class="form-control" value="{{ $entityData->developer ?? 'N/A' }}">
+                        <input type="text" name="developer" class="form-control" value="{{ $entityData->developer ?? '' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['developer'] }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['publisher'] }}</label>
-                        <input type="text" name="publisher" class="form-control" value="{{ $entityData->publisher ?? 'N/A' }}">
+                        <input type="text" name="publisher" class="form-control" value="{{ $entityData->publisher ?? '' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['publisher'] }}">
                     </div>
                 </div>
 
@@ -81,7 +81,7 @@
                         <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['platforms'] }}</label>
                         <select class="form-select" name="platforms[]" multiple>
                             @foreach($gamePlatforms as $platform)
-                                <option value="{{ $platform->id }}" {{ (isset($entityData) && $entityData->platforms->contains($platform->id)) ? 'selected' : '' }}>
+                                <option value="{{ $platform->id }}" {{ (isset($entityData) && $entityData->platforms && $entityData->platforms->contains($platform->id)) ? 'selected' : '' }}>
                                     {{ $platform->name }}
                                 </option>
                             @endforeach
@@ -93,29 +93,31 @@
 
                 <div class="mb-3">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['thumbnail_image'] }}</label>
-                    <input type="file" class="form-control" name="thumbnail">
+                    <input type="file" class="form-control" name="thumbnail" accept="image/*">
                 </div>
 
+                {{--
                 <div class="mb-3">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['gallery_images'] }}</label>
-                    <input type="file" class="form-control" name="gallery[]" multiple>
+                    <input type="file" class="form-control" name="gallery[]" accept="image/*" multiple>
                 </div>
+                --}}
 
                 <div class="mb-4">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['trailer_url'] }}</label>
-                    <input type="text" class="form-control" name="trailer_url">
+                    <input type="text" class="form-control" name="trailer_url" value="{{ $entityData->trailer_url ?? '' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['trailer_url'] }}">
                 </div>
 
                 <h4 class="section-title">{{ $t['admin']['entity_edit_page']['sections']['seo'] }}</h4>
 
                 <div class="mb-3">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['seo_title'] }}</label>
-                    <input type="text" class="form-control" name="seo_title">
+                    <input type="text" class="form-control" name="seo_title" value="{{ $entityData->meta_title ?? '' }}" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['seo_title'] }}">
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['seo_description'] }}</label>
-                    <textarea rows="3" class="form-control" name="seo_description"></textarea>
+                    <textarea rows="3" class="form-control" name="meta_description" placeholder="{{ $t['admin']['entity_edit_page']['placeholders']['seo_description'] }}">{{ $entityData->meta_description ?? '' }}</textarea>
                 </div>
 
                 <div class="d-flex justify-content-between">

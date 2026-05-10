@@ -8,6 +8,7 @@ return [
     'confirm_password' => 'Confirm Password',
     'create_account' => 'Create a new account',
     'login_prompt' => 'Already have an account?',
+    'create_new' => 'Create New',
     'add' => 'Add',
     'edit' => 'Edit',
     'delete' => 'Delete',

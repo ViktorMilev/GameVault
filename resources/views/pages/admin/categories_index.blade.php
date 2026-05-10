@@ -15,11 +15,20 @@
             'params' => ['entity' => 'games', 'slug' => 'game']
         ],
         'categories' => [
-            'admin-title' => 'Categories',
-            'admin-subtitle' => 'Create, manage and delete all categories in your database',
-            'label' => 'A New Category',
-            'route' => 'admin.entities.create',
-            'params' => ['entity' => 'categories', 'slug' => 'category']
+            'admin-title' => $t['admin']['categories_index_page']['page_headers']['categories'] ?? '',
+            'admin-subtitle' => $t['admin']['categories_index_page']['page_subheaders']['categories'] ?? '',
+            'actions' => [
+                [
+                    'label' => $t['admin']['categories_index_page']['create_btn_text']['categories'],
+                    'route' => 'admin.entities.create',
+                    'params' => ['entity' => 'categories', 'slug' => 'category']
+                ],
+                [
+                    'label' => $t['admin']['categories_index_page']['create_btn_text']['subcategories'],
+                    'route' => 'admin.entities.create',
+                    'params' => ['entity' => 'subcategories', 'slug' => 'subcategory']
+                ]
+            ]
         ],
         'game_platforms' => [
             'admin-title' => 'Game Platforms',
@@ -78,14 +87,22 @@
                         <button class="btn btn-primary  dropdown-toggle no-arrow"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            Create New
+                            {{ $t['general']['create_new'] }}
                         </button>
 
                         <div class="dropdown-menu">
-                            @if($currentEntity)
-                                <a href="{{ route($currentEntity['route'], $currentEntity['params']) }}" class="dropdown-item">
-                                    Add {{ $currentEntity['label'] }}
-                                </a>
+                            @if (isset($currentEntity['actions']))
+                                @foreach ($currentEntity['actions'] as $action)
+                                    <a href="{{ route($action['route'], $action['params']) }}" class="dropdown-item">
+                                        {{ $t['general']['add'] }} {{ $action['label'] }}
+                                    </a>
+                                @endforeach
+                            @else
+                                @if($currentEntity)
+                                    <a href="{{ route($currentEntity['route'], $currentEntity['params']) }}" class="dropdown-item">
+                                        {{ $t['general']['add'] }} {{ $currentEntity['label'] }}
+                                    </a>
+                                @endif
                             @endif
                         </div>
                     </div>

@@ -36,6 +36,20 @@
                         <input type="text" name="name" class="form-control" placeholder="{{ $t['admin']['entity_edit_page']['fields']['title'] }}" value="{{ old('name') }}" required>
                     </div>
                 </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label class="form-label">{{ $t['admin']['entity_edit_page']['fields']['category'] }}</label>
+                        <select name="parent_category_id" class="form-select">
+                            <option value="">{{ $t['admin']['entity_edit_page']['placeholders']['category_placeholder'] }}</option>
+                            @foreach($gameCategories as $category)
+                                <option value="{{ $category->id }}" {{ old('parent_category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('admin.categories.index', ['entity' => 'categories']) }}" class="btn btn-secondary">{{ $t['admin']['entity_edit_page']['actions']['cancel'] }}</a>

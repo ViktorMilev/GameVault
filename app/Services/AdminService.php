@@ -72,15 +72,11 @@ class AdminService
         ];
 
         if ($request->hasFile('thumbnail')) {
-            $thumbnailFile = null;
-
-            foreach ($request->file('gallery') as $file) {
-                $filename = uniqid() . '_' . $file->getClientOriginalName();
-                $file->storeAs('public/images/game_covers', $filename);
-                $thumbnailFile = $filename;
-            }
-
-            $newData['cover_image'] = $thumbnailFile;
+            $file = $request->file('thumbnail');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $destinationPath = public_path('images/game_covers');
+            $file->move($destinationPath, $filename);
+            $newData['cover_image'] = $filename;
         }
 
         if ($request->hasFile('gallery')) {
@@ -104,7 +100,116 @@ class AdminService
         });
 
 
-        return redirect('/admin/games/new-game')->with('success', 'Game added successfully.');
+        return redirect('/admin/games/new-game')->with('success', __('admin.success_messages.game_added'));
+    }
+
+    public function addGamePlatform(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $filename = '';
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $destinationPath = public_path('images/platform_icons');
+            $file->move($destinationPath, $filename);
+        }
+
+        $newData = [
+            'name' => $validated['name'],
+            'slug' => $validated['slug'] ?? Str::slug($validated['name']),
+            'icon_filepath' => $filename,
+        ];
+
+        $gamePlatform = Platform::create($newData);
+
+
+        return redirect('/admin/platforms/new-platform')->with('success', __('admin.success_messages.platform_added'));
+    }
+
+    public function addGameCategory(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $newData = [
+            'name' => $validated['name'],
+        ];
+
+        $gameCategory = Category::create($newData);
+
+
+        return redirect('/admin/categories/new-category')->with('success', __('admin.success_messages.category_added'));
+    }
+
+    public function addGameSubcategory(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'parent_category_id' => 'required|integer|exists:categories,id',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $newData = [
+            'name' => $validated['name'],
+            'category_id' => $validated['parent_category_id'],
+            'slug' => Str::slug($validated['name']),
+        ];
+
+        $gameSubcategory = Subcategory::create($newData);
+        
+
+        return redirect('/admin/subcategories/new-subcategory')->with('success', __('admin.success_messages.subcategory_added'));
+    }
+
+    public function addUser(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string|max:255|unique:users,username',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'avatar' => 'nullable|image|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $newData = [
+            'username' => $validated['username'],
+            'email' => $validated['email'],
+            'password' => bcrypt('defaultpassword'),
+            'avatar' => '',
+        ];
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/uploads', $filename);
+            $newData['avatar'] = $filename;
+        }
+
+        $user = User::create($newData);
+
+        return redirect('/admin/users/new-user')->with('success', __('admin.success_messages.user_added'));
     }
 
     public function updateGame(Request $request, $slug) {
@@ -146,6 +251,14 @@ class AdminService
             }
         }
 
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $destinationPath = public_path('images/game_covers');
+            $file->move($destinationPath, $filename);
+            $updateData['cover_image'] = $filename;
+        }
+
         if ($request->hasFile('gallery')) {
             $galleryFiles = [];
             foreach ($request->file('gallery') as $file) {
@@ -168,7 +281,7 @@ class AdminService
             $game->platforms()->sync($request->input('platforms'));
         }
 
-        return redirect('/admin/games/edit/' . $game->slug)->with('success', 'Game updated successfully.');
+        return redirect('/admin/games/edit/' . $game->slug)->with('success', __('admin.success_messages.game_updated'));
     }
 
     public function updateGamePlatform(Request $request, $slug) {
@@ -195,6 +308,14 @@ class AdminService
             }
         }
 
+        if ($request->hasFile('thumbnail')) {
+            $file = $request->file('thumbnail');
+            $filename = uniqid() . '_' . $file->getClientOriginalName();
+            $destinationPath = public_path('images/platform_icons');
+            $file->move($destinationPath, $filename);
+            $updateData['icon_filepath'] = $filename;
+        }
+
         if (empty($updateData)) {
             return redirect()->back()->with('error', 'Nothing to update.');
         }
@@ -203,7 +324,7 @@ class AdminService
 
         $gamePlatform->update($updateData);
 
-        return redirect('/admin/game_platforms/edit/' . $gamePlatform->slug)->with('success', 'Game Platform updated successfully.');
+        return redirect('/admin/game_platforms/edit/' . $gamePlatform->slug)->with('success', __('admin.success_messages.platform_updated'));
     }
 
     public function updateGameCategory(Request $request, $slug) {
@@ -236,7 +357,40 @@ class AdminService
 
         $gameCategory->update($updateData);
 
-        return redirect('/admin/categories/edit/' . $gameCategory->id)->with('success', 'Game Category updated successfully.');
+        return redirect('/admin/categories/edit/' . $gameCategory->id)->with('success', __('admin.success_messages.category_updated'));
+    }
+
+    public function updateGameSubcategory(Request $request, $slug) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $exists = DB::table('subcategories')->where('id', $slug)->first();
+
+        if (!$exists) {
+            return redirect()->back()->with('error', "Game Subcategory with slug '{$slug}' not found.");
+        }
+
+        $updateData = [];
+        $fields = [
+            'name' => 'name',
+        ];
+
+        foreach($fields as $requestKey => $dbColumn) {
+            if ($request->has($requestKey)) {
+                $updateData[$dbColumn] = $request->input($requestKey);
+            }
+        }
+
+        if (empty($updateData)) {
+            return redirect()->back()->with('error', 'Nothing to update.');
+        }
+
+        $gameCategory = Subcategory::where('id', $slug)->first();
+
+        $gameCategory->update($updateData);
+
+        return redirect('/admin/subcategories/edit/' . $gameCategory->id)->with('success', __('admin.success_messages.subcategory_updated'));
     }
 
     public function updateUser(Request $request, $username)
@@ -264,6 +418,6 @@ class AdminService
             $user->update($updateData);
         }
 
-        return redirect('/admin/users/edit/' . $user->username)->with('success', 'User updated successfully.');
+        return redirect('/admin/users/edit/' . $user->username)->with('success', __('admin.success_messages.user_updated'));
     }
 }

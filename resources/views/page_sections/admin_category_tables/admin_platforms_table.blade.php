@@ -54,16 +54,9 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('game.article', $platform->slug) }}" class="dropdown-item"
-                                    target="_blank">
-                                    {{ $t['general']['view'] }}
-                                </a>
-                            </li>
-
-                            <li>
                                 <form method="POST"
                                     action="{{ route('admin.entities.delete', ['entity' => 'game_platforms', 'slug' => $platform->slug]) }}"
-                                    onsubmit="return confirm('Delete this game?')">
+                                    onsubmit="return confirm('Delete this game platform?')">
                                     @csrf
 
                                     <button type="submit" class="dropdown-item text-danger">
